@@ -1,0 +1,29 @@
+#include "libft.h"
+#include "test.h"
+
+void	ft_test_putstr_fd(void)
+{
+	printf(MAGENTA"PUTSTR FD\n"UNCOLOR);
+	/*int fd = open("./test_result_ft_putstr_fd.testresult", O_CREAT | O_WRONLY, S_IRUSR | S_IWUSR);
+	ft_putstr_fd("Hello", fd);
+	printf("Test file should now contain 'Hello', without a newline.\n");
+	close(fd);*/
+
+	char	buf[300];
+	char	str[] = "Hello My Name Is James!";
+	int		fd = open(FPATH, O_WRONLY | O_CREAT, 0666);
+
+	bzero(buf, 300);
+	if (fd != -1)
+	{
+		ft_putstr_fd(str, fd);
+		close(fd);
+		fd = open(FPATH, O_RDONLY);
+		read(fd, buf, strlen(str));
+		close(fd);
+		printf("[%s]\n", buf);
+		assert(strcmp(buf, str) == 0);
+		remove(FPATH);
+	}
+	else printf(RED"opening fd failed\n"UNCOLOR);
+}

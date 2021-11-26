@@ -1,0 +1,31 @@
+#include "libft.h"
+#include "test.h"
+
+void ft_test_strlcat(void);
+void ft_test_strdup(void);
+void ft_test_atoi(void);
+void ft_test_memccpy(void);
+void ft_test_strnstr(void);
+void ft_test_strncmp(void);
+void ft_test_strncpy(void);
+void ft_test_strncat(void);
+
+int main(void)
+{
+    ft_test_strlcat();
+    print_separator();
+    ft_test_strdup();
+    print_separator();
+    ft_test_atoi();
+    print_separator();
+    ft_test_memccpy();
+    print_separator();
+    ft_test_strnstr();
+    print_separator();
+    ft_test_strncmp();
+    print_separator();
+    ft_test_strncpy();
+    print_separator();
+    ft_test_strncat();
+    print_separator();
+}

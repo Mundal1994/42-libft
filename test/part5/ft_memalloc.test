@@ -1,0 +1,19 @@
+#include "libft.h"
+#include "test.h"
+
+void	ft_test_memalloc(void)
+{
+	printf(MAGENTA"MEMALLOC\n"UNCOLOR);
+	void	*ptr;
+	int		i;
+
+	ptr = ft_memalloc(8);
+	i = 0;
+	while (i < 8)
+	{
+		printf("%p: %d\n", ptr + i, *(int *) (ptr + i));
+		assert(*(char *) (ptr + i) == 0);
+		i++;
+	}
+	free(ptr);
+}

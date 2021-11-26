@@ -1,0 +1,32 @@
+#include "libft.h"
+#include "test.h"
+
+void	print_compare_nequ(char *s1, char *s2, int n)
+{
+	printf("Comparing '%s' and '%s' until %i, result is: %i\n", s1, s2, n, ft_strnequ(s1, s2, n));
+}
+
+void	ft_test_strnequ(void)
+{
+	printf(MAGENTA"STRNEQU\n"UNCOLOR);
+	/*
+	printf("This function gives two strings to ft_strnequ, and prints out the output.\n\n");
+
+	print_compare_nequ("Hi", "Hi", 2);
+	print_compare_nequ("James", "James", 5);
+	print_compare_nequ("James", "Jam", 2);
+	print_compare_nequ("James", "Hi", 5);
+	print_compare_nequ("Hi", "James", 5);
+	print_compare_nequ("Hi", "", 2);
+	print_compare_nequ("", "Hi", 2);
+	print_compare_nequ("Hi", "", 0);
+	print_compare_nequ("", "Hi", 0);
+	print_compare_nequ("", "", 2);
+	*/
+	char const	s1[] = "Jamesthegreat";
+	char const	s2[] = "JamesTheGreat";
+
+	printf("test - if nothing displays it's correct\n");
+	assert(ft_strnequ(s1, s2, 5) == 1);
+	assert(ft_strnequ(s1, s2, 8) == 0);
+}

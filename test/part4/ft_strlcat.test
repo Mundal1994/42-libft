@@ -1,0 +1,116 @@
+#include "libft.h"
+#include "test.h"
+
+void	ft_strlcat_test(void)
+{
+	printf("--- FT\n");
+	char s1[] = "Hello\0     ";
+	printf("Combining '%s' and '%s':\n", s1, "Hello");
+	printf("%s - %zu\n\n", s1, ft_strlcat(s1, "Hello", 12));
+	char s2[] = "Hello\0     ";
+	printf("Combining '%s' and '%s':\n", s2, "Hi");
+	printf("%s - %zu\n\n", s2, ft_strlcat(s2, "Hi", 12));
+	char s3[] = "Hello\0     ";
+	printf("Combining '%s' and '%s':\n", s3, "There");
+	printf("%s - %zu\n\n", s3, ft_strlcat(s3, "There", 12));
+	char s4[] = "Hello\0     ";
+	printf("Combining '%s' and '%s':\n", s4, "This string is way too long for the destination.");
+	printf("%s - %zu\n\n", s4, ft_strlcat(s4, "This string is way too long for the destination.", 12));
+	printf("--- FT\n");
+}
+
+void	builtin_strlcat_test(void)
+{
+	printf("--- BUILTIN\n");
+	char s1[] = "Hello\0     ";
+	printf("Combining '%s' and '%s':\n", s1, "Hello");
+	printf("%s - %zu\n\n", s1, strlcat(s1, "Hello", 12));
+	char s2[] = "Hello\0     ";
+	printf("Combining '%s' and '%s':\n", s2, "Hi");
+	printf("%s - %zu\n\n", s2, strlcat(s2, "Hi", 12));
+	char s3[] = "Hello\0     ";
+	printf("Combining '%s' and '%s':\n", s3, "There");
+	printf("%s - %zu\n\n", s3, strlcat(s3, "There", 12));
+	char s4[] = "Hello\0     ";
+	printf("Combining '%s' and '%s':\n", s4, "This string is way too long for the destination.");
+	printf("%s - %zu\n\n", s4, strlcat(s4, "This string is way too long for the destination.", 12));
+	printf("--- BUILTIN\n");
+}
+
+static void dstsize_test(void)
+{
+	char	str0[] = "So long, and thanks for all the fish.";
+	char	str1[300] = "Life, the Universe, and Everything.";
+	char	str2[300] = "Life, the Universe, and Everything.";
+	size_t	max = strlen(str0) + 5;
+	size_t	libc, libft;
+
+	libc = strlcat(str1, str0, max);
+	libft = ft_strlcat(str2, str0, max);
+	if (strcmp(str1, str2) != 0 || libc != libft)
+	{
+		printf(RED"test failed when dstsize is smaller than dstlen + srclen\n");
+		printf("libc:\t[%s](%zu)\nlibft:\t[%s](%zu)\n"UNCOLOR, str1, libc, str2, libft);
+	    abort();
+	}	   
+}
+
+static int	rand_strlcat(size_t max_len, size_t i)
+{
+	char	*src, *ft_cat, *libc_cat;
+	size_t	src_len = randi(max_len);
+	size_t	root_len = randi(max_len) + 1;
+	size_t	dest_len = root_len + randi(src_len) + 1;
+	size_t	libc_total, ft_total;
+
+	src = (char *) malloc(sizeof(char) * (src_len + 1));
+	rand_str(src, src_len);
+	ft_cat = (char *) malloc(sizeof(char) * (dest_len + 1));
+	libc_cat = (char *) malloc(sizeof(char) * (dest_len + 1));
+	bzero(ft_cat, dest_len);
+	bzero(libc_cat, dest_len);
+	rand_str(ft_cat, root_len);
+	strncat(libc_cat, ft_cat, root_len);
+	ft_total = ft_strlcat(ft_cat, src, dest_len + 1);
+	libc_total = strlcat(libc_cat, src, dest_len + 1);
+	if (ft_total != libc_total || strcmp(ft_cat, libc_cat) != 0)
+	{
+		printf(RED"test #%zu failed (dstsize=%zu, src len=%zu)\n", i, dest_len + 1, strlen(src));
+		printf("strlcat returned %zu, ft_strlcat %zu\n", libc_total, ft_total);
+		printf("src\t[%s]\nlibc\t[%s]\nlibft\t[%s]\n"UNCOLOR, src, libc_cat, ft_cat);
+		return (0);
+		//abort();
+	}
+	free(src);
+	free(ft_cat);
+	free(libc_cat);
+	return (1);
+}
+
+void		ft_test_strlcat(void)
+{
+	printf(MAGENTA"STRLCAT:\n"UNCOLOR);
+	/*printf("prints the result followed by the return value of (ft_)strlcat.\n");
+	ft_strlcat_test();
+	printf("\n");
+	builtin_strlcat_test();*/
+
+	size_t tests = 100, i = 0;
+	int correct = 1;
+
+	printf("test random strings\n");
+	dstsize_test();
+	#ifndef LINUX
+		rand_strlcat(0, i++);
+	#endif
+	while (i < tests)
+	{
+		correct = rand_strlcat(75, i++);
+		if (correct == 0)
+			abort();
+	}
+	if (correct == 1)
+		printf(GREEN"				OK!\n"UNCOLOR);
+	else
+		printf(RED"				KO!\n"UNCOLOR);
+}

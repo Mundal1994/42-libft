@@ -1,0 +1,29 @@
+#include "libft.h"
+#include "test.h"
+
+void	ft_test_putendl(void)
+{
+	printf(MAGENTA"PUTENDL\n"UNCOLOR);
+	/*
+	printf("This should write 'Hello there' followed by a newline:\n");
+	ft_putendl("Hello there");
+	printf("\n");*/
+
+	FILE	*fd;
+	char	*buf;
+	char	str[] = "Hello My Name Is James!";
+
+	printf("test - print [Hello My Name Is James!]\n");
+	buf = (char *) malloc(sizeof(char) * (strlen(str) + 2));
+	fd = freopen(FPATH, "w", stdout);
+	ft_putendl(str);
+	fclose(fd);
+	fd = fopen(FPATH, "r");
+	fread(buf, strlen(str) + 2, 1, fd);
+	fclose(fd);
+	freopen("/dev/tty", "w", stdout);
+	printf("[%s]\n", buf);
+	assert(strncmp(buf, str, strlen(str)) == 0);
+	assert(buf[strlen(str)] == '\n');
+	remove(FPATH);
+}

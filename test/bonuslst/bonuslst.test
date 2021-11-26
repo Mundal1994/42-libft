@@ -1,0 +1,318 @@
+#include "libft.h"
+#include "test.h"
+
+static void	print_content_assert_lowercase(t_list *elem)
+{
+	if (elem->content != NULL)
+	{
+		printf("[%s]\n", (char*)elem->content);
+		assert(*(char *)elem->content == 'h');
+	}
+}
+
+static void	print_content_assert_uppercase(t_list *elem)
+{
+	if (elem->content != NULL)
+	{
+		printf("[%s]\n", (char*)elem->content);
+		assert(*(char *)elem->content == 'H');
+	}
+}
+
+static t_list	*uppercase_content(t_list *elem)
+{
+	t_list	*new;
+
+	new = (t_list *) malloc(sizeof(t_list));
+	if (!new)
+		return (NULL);
+
+	new->next = NULL;
+	new->content_size = elem->content_size;
+
+	if (elem->content != NULL)
+	{
+		char	*new_content, *nc;
+		char	*oc = (char *) elem->content;
+		
+		new_content = (char *) malloc(elem->content_size);
+		bzero(new_content, elem->content_size);
+		if (!new_content)
+		{
+			free(new);
+			return (NULL);
+		}
+		nc = new_content;
+		while (*oc)
+		{
+			*nc = toupper(*oc);
+			nc++;
+			oc++;
+		}
+		new->content = new_content;
+		return (new);
+	}
+	else return (NULL);
+}
+
+void    print_element(t_list *elem)
+{
+    printf("- content: %i\n- address: %p\n- size: %zu\n- next: %p\n", *(int *)(elem->content), elem->content, elem->content_size, elem->next);
+}
+
+void	print_list(t_list **alst)
+{
+	t_list	*cursor;
+
+	cursor = *alst;
+	//printf("Printing list, starting at: %p\n", cursor);
+	while (cursor)
+	{
+		//printf("(%p) %s\n", cursor, (char *)cursor->content);
+		printf("%s\n", (char *)cursor->content);
+		cursor = cursor->next;
+	}
+	//printf("List ends.\n\n");
+}
+
+static void	del_content(void *content, size_t size)
+{
+	if (content != NULL)
+	{
+		//printf("deleting list content [%s]\n", (char *) content);
+		bzero(content, size);
+		free(content);
+	}
+	//else printf("deleting list with no content\n");
+}
+
+void	ft_test_lstadd(void)
+{
+	printf(MAGENTA"LSTADD\n"UNCOLOR);
+
+	t_list	*list;
+
+	list = ft_lstnew((void *)"2nd", 10);
+	//printf("Content should be '2nd':\n");
+	//print_list(&list);
+	ft_lstadd(&list, ft_lstnew((void *)"1st", 10));
+	//printf("Expedted output: '1st' then '2nd':\n");
+	print_list(&list);
+
+	t_list	*head, *mid, *tail, *top;
+	char	str1[] = "name", str2[] = "is", str3[] = "james";
+	char	str4[] = "my";
+	size_t	size = sizeof(char) * (strlen(str1) + 1);
+
+	printf("test - if no error warnings display it's correct\n");
+	head = ft_lstnew(str1, size);
+	mid = ft_lstnew(str2, size);
+	tail = ft_lstnew(str3, size);
+	top = ft_lstnew(str4, size);
+	head->next = mid;
+	mid->next = tail;
+	ft_lstadd(&head, top);
+	assert(head = top);
+	assert(strcmp(str1, (char *) top->next->content) == 0);
+	assert(top->next->next == mid);
+	assert(top->next->next->next == tail);
+	ft_lstdel(&top, &del_content);
+}
+
+void	del(void *ptr, size_t size) {
+    free(ptr);
+    (void) size;
+}
+
+void	ft_test_lstdel(void)
+{
+	printf(MAGENTA"LSTDEL\n"UNCOLOR);
+	
+	t_list	*test;
+	int		data;
+
+	data = 10;
+	test = ft_lstnew(&data, sizeof(int));
+	test->next = ft_lstnew(&data, sizeof(int));
+	test->next->next = ft_lstnew(&data, sizeof(int));
+
+	//printf("Created a list consisting of of three elements, starting with:\n");
+    //print_element(test);
+	//printf("Deleting the list.\n");
+	ft_lstdel(&test, &del);
+	printf("Expedted output 0x0: %p\n", test);
+
+	t_list	*head, *mid, *tail;
+	char	str1[] = "1st", str2[] = "2nd", str3[] = "add";
+	void	*tailcheck;
+	size_t	size = sizeof(char) * (strlen(str1) + 1);
+
+	head = ft_lstnew(str1, size);
+	mid = ft_lstnew(str2, size);
+	tail = ft_lstnew(str3, size);
+	head->next = mid;
+	mid->next = tail;
+	tailcheck = tail->content;
+	printf("tail->content before lstdel:\t[");
+	print_mem(tailcheck, size);
+	printf("]\n");
+	ft_lstdel(&mid, &del_content);
+	assert(mid == NULL);
+	printf("tail->content after lstdel:\t[");
+	print_mem(tailcheck, size);
+	printf("]\n");
+	ft_lstdelone(&head, &del_content);
+}
+
+void    ft_test_lstdelone(void)
+{
+    printf(MAGENTA"LSTDELONE\n"UNCOLOR);
+	/*
+	t_list	*test;
+	int		data;
+
+	data = 10;
+	test = ft_lstnew(&data, 100);
+	printf("Created a new element:\n");
+    print_element(test);
+	printf("Deleting the element.\n");
+	ft_lstdelone(&test, &del);
+	printf("The element has been deleted, the pointer to it should be null: %p\n", test);*/
+
+	t_list	*head, *tail;
+	char	str1[] = "1st", str2[] = "2nd";
+	size_t	size = sizeof(char) * (strlen(str1) + 1);
+
+	printf("test - if no error messages it's OK\n");
+	head = ft_lstnew(str1, size);
+	tail = ft_lstnew(str2, size);
+	ft_lstdelone(&head, &del_content);
+	assert(head == NULL);
+	assert(strcmp((char *) tail->content, "2nd") == 0);
+	ft_lstdelone(&tail, &del_content);
+}
+
+void	iter(t_list *elem)
+{
+	//printf("(%p) %s\n", elem, (char *)(elem->content));
+	printf("%s\n", (char *)(elem->content));
+}
+
+void    ft_test_lstiter(void)
+{
+    printf(MAGENTA"LSTITER\n"UNCOLOR);
+	t_list	*list;
+
+	list = ft_lstnew((void *)"Hi", 10);
+	list->next = ft_lstnew((void *)"my name", 10);
+	list->next->next = ft_lstnew((void *)"is", 10);
+	list->next->next->next = ft_lstnew((void *)"james", 10);
+
+	//printf("Created a list of four elements, now printing it using ft_lstiter:\n");
+	ft_lstiter(list, &iter);
+
+	t_list	*head, *mid, *tail;
+	char	str1[] = "hione", str2[] = "hitwo", str3[] = "hiadd";
+	size_t	size = sizeof(char) * (strlen(str1) + 1);
+
+	printf("test - if no error message OK!\n");
+	head = ft_lstnew(str1, size);
+	mid = ft_lstnew(str2, size);
+	tail = ft_lstnew(str3, size);
+	head->next = mid;
+	mid->next = tail;
+	ft_lstiter(head, &print_content_assert_lowercase);
+	ft_lstdel(&head, &del_content);
+}
+
+t_list	*map(t_list *elem)
+{
+	t_list *result;
+
+	result = ft_lstnew(elem->content, elem->content_size);
+	((char *)(result->content))[0] = '!';
+	return (result);
+}
+
+
+void    ft_test_lstmap(void)
+{
+	printf(MAGENTA"LSTMAP\n"UNCOLOR);
+	t_list	*list;
+	t_list	*result;
+
+	list = ft_lstnew((void *)"1st elem", 10);
+	list->next = ft_lstnew((void *)"2nd elem", 10);
+	list->next->next = ft_lstnew((void *)"3rd elem", 10);
+	list->next->next->next = ft_lstnew((void *)"4th elem", 10);
+
+	result = ft_lstmap(list, &map);
+	printf("after lstmap: \n");
+	print_list(&result);
+
+	printf("Orig after: \n");
+	print_list(&list);
+
+	t_list	*head, *mid, *tail, *copy;
+	char	str1[] = "hione", str2[] = "hitwo", str3[] = "hiadd";
+	size_t	size = sizeof(char) * (strlen(str1) + 1);
+
+	printf("test - if no error messages OK!\n");
+	head = ft_lstnew(str1, size);
+	mid = ft_lstnew(str2, size);
+	tail = ft_lstnew(str3, size);
+	head->next = mid;
+	mid->next = tail;
+	copy = ft_lstmap(head, &uppercase_content);
+	ft_lstiter(copy, &print_content_assert_uppercase);
+	ft_lstdel(&head, &del_content);
+	ft_lstdel(&copy, &del_content);
+}
+
+void    ft_test_lstnew(void)
+{
+    printf(MAGENTA"LSTNEW\n"UNCOLOR);
+
+	t_list	*test;
+	int		data;
+
+	data = 5;
+	//printf("Creating new list with content of '5' and size of 100.\n");
+	test = ft_lstnew(&data, 100);
+	//printf("Result of ft_lstnew:\n");
+    //print_element(test);
+	// change input value should not affect the new list created
+	data = 3;
+	printf("Expected output '5': %i\n", *(int *)(test->content));
+
+	t_list	*list;
+	char	str[] = "fortytwo";
+	size_t	size = sizeof(char) * (strlen(str) + 1);
+
+	printf("test - if no error messages OK!\n");
+	list = ft_lstnew(str, size);
+	//printf("list->content: [%s]\n", list->content);
+	assert(list->content_size == size);
+	del_content(list->content, size);
+	free(list);
+	list = ft_lstnew(NULL, 42);
+	assert(list->content_size == 0);
+	del_content(list->content, 42);
+	free(list);
+}
+
+int main(void)
+{
+    ft_test_lstnew();
+    print_separator();
+    ft_test_lstdelone();
+    print_separator();
+    ft_test_lstdel();
+    print_separator();
+    ft_test_lstadd();
+    print_separator();
+    ft_test_lstiter();
+    print_separator();
+    ft_test_lstmap();
+    print_separator();
+}

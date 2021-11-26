@@ -1,0 +1,198 @@
+#include "libft.h"
+#include "test.h"
+
+int	valid_atoi(size_t max_spaces, size_t i)
+{
+	size_t	spaces = randi(max_spaces) + 1;
+	char	*str, *s1;
+	int		n = randi(INT_MAX);
+
+	str = (char *) malloc(sizeof(char) * (spaces + 12));
+	s1 = str;
+	while (spaces)
+	{
+		if (randi(2))
+			*s1++ = (char) (randi(5) + 9);
+		else
+			*s1++ = ' ';
+		spaces--;
+	}
+	if (randi(10) > 6)
+	{
+		if (randi(2))
+			*s1++ = '-';
+		else
+			*s1++ = '+';
+	}
+	sprintf(s1, "%d", n);
+	*(s1 + randi(strlen(s1))) = rand_char();
+	if (ft_atoi(str) != atoi(str))
+	{
+		printf(RED"test #%zu failed\nstr: [%s]\ngot %d, expected %d\n"UNCOLOR, 
+				i, str, ft_atoi(str), atoi(str));
+		return (0);//abort();
+	}
+	free(str);
+	return (1);
+}
+
+int	bad_atoi(size_t max_spaces, size_t i)
+{
+	size_t	spaces = randi(max_spaces) + 1;
+	size_t	len = spaces + 20;
+	char	*str, *s1;
+	int		n = randi(INT_MAX);
+
+	str = (char *) malloc(sizeof(char) * (len));
+	bzero(str, len);
+	s1 = str;
+	while (spaces > randi(4))
+	{
+		if (randi(3))
+			*s1++ = ' ';
+		else
+			*s1++ = (char) randi(14);
+		spaces--;
+	}
+	while (spaces > 0)
+	{
+		if (randi(2))
+			*s1++ = '-';
+		else
+			*s1++ = '+';
+		spaces--;
+	}
+	sprintf(s1, "%d", n);
+	while (randi(4))
+		*(str + randi(strlen(str))) = rand_char();
+	if (ft_atoi(str) != atoi(str))
+	{
+		printf(RED"test #%zu failed\nstr: [%s]\ngot %d, expected %d\n"UNCOLOR, 
+				i, str, ft_atoi(str), atoi(str));
+		return (0);//abort();
+	}
+	free(str);
+	return (1);
+}
+
+
+void	print_comparison(const char *str)
+{
+	//printf("%11i == %11i --- string: '%s'\n", atoi(str), ft_atoi(str), str);
+	printf("String: [%s]\n", str);
+	printf("Orig: [%d]\n", atoi(str));
+	printf("Mine: [%d]\n", ft_atoi(str));
+
+	if (atoi(str) - ft_atoi(str) == 0)
+		printf(GREEN"				OK!\n"UNCOLOR);
+	else
+		printf(RED"				KO!\n"UNCOLOR);
+}
+
+void	ft_test_atoi(void)
+{
+	printf(MAGENTA"ATOI\n"UNCOLOR);
+	
+	printf("The output on the left is the system's atoi, the one on the right is ft_atoi.\nAfter those two is the string that was given to both functions.\n\n");
+	print_comparison("1");
+	print_comparison("-1");
+	print_comparison("0");
+	print_comparison("-0");
+	print_comparison("100");
+	print_comparison("-100");
+	print_comparison("123456789");
+	print_comparison("-123456789");
+	print_comparison("123123123123");
+	print_comparison("-123123123123");
+	print_comparison("123123+123123");
+	print_comparison("-123123+123123");
+	print_comparison("123123-123123");
+	print_comparison("-123123-123123");
+	print_comparison("123123+-123123");
+	print_comparison("-123123+-123123");
+	//print_comparison("9223372036854775807");
+	//print_comparison("-9223372036854775808");
+	//print_comparison("99999999999999999999999999");
+	//print_comparison("-99999999999999999999999999");
+	print_comparison("+1");
+	print_comparison("+0");
+	print_comparison("+100");
+	print_comparison("+123456789");
+	print_comparison("+-1");
+	print_comparison("-+1");
+	print_comparison("++1");
+	print_comparison("--1");
+	print_comparison("          1");
+	print_comparison("1        ");
+	print_comparison("        ");
+	print_comparison("          -1");
+	print_comparison("-1        ");
+	print_comparison("   -       1");
+	print_comparison("1     -   ");
+	print_comparison("          +1");
+	print_comparison("+1        ");
+	print_comparison("   +       1");
+	print_comparison("1     +   ");
+	print_comparison("hi1");
+	print_comparison("hi-1");
+	print_comparison("-hi1");
+	print_comparison("-1hi");
+	print_comparison("hi  1");
+	print_comparison("hi  -1");
+	print_comparison("-  hi1");
+	print_comparison("-  1hi");
+
+	size_t	tests = 100, max_spaces = 10, i = 0;
+	char	str1[] = " 42";
+	char	str2[] = " -42";
+	char	str3[] = " 0";
+	char	str4[] = " 2147483647";
+	char	str5[] = " -2147483648";
+	char	str6[] = "5464999935399999999";
+
+	int correct = 1;
+
+	printf("test valid atoi\n");
+	correct = valid_atoi(10, 0);
+	if (correct == 1)
+		printf(GREEN"				OK!\n"UNCOLOR);
+	else
+		printf(RED"				KO!\n"UNCOLOR);
+	printf("testing easy strings\n");
+	printf("%d\n%d\n%d\n%d\n%d\n", ft_atoi(str1), ft_atoi(str2), ft_atoi(str3), ft_atoi(str4), ft_atoi(str5));
+	assert(ft_atoi(str1) == atoi(str1));
+	assert(ft_atoi(str2) == atoi(str2));
+	assert(ft_atoi(str3) == atoi(str3));
+	assert(ft_atoi(str4) == atoi(str4));
+	assert(ft_atoi(str5) == atoi(str5));
+	printf("testing valid strings\n");
+	while (i < tests)
+	{
+		correct = valid_atoi(max_spaces, i++);
+		if (correct == 0)
+			abort();
+	}
+	if (correct == 1)
+		printf(GREEN"				OK!\n"UNCOLOR);
+	else
+		printf(RED"				KO!\n"UNCOLOR);
+	printf("testing bad strings\n");
+	i = 0;
+	while (i < tests)
+	{
+		correct = bad_atoi(max_spaces, i++);
+		if (correct == 0)
+			abort();
+	}
+	if (correct == 1)
+		printf(GREEN"				OK!\n"UNCOLOR);
+	else
+		printf(RED"				KO!\n"UNCOLOR);
+	printf("final challenge\n");
+	//printf(str6:[%s]\natoi:\t%d\nft_atoi\t%d\n", str6, atoi(str6), ft_atoi(str6));
+	if (atoi(str6) - ft_atoi(str6) == 0)
+		printf(GREEN"				OK!\n"UNCOLOR);
+	else
+		printf(RED"				KO!\n"UNCOLOR);
+}
+

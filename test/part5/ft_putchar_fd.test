@@ -1,0 +1,29 @@
+#include "libft.h"
+#include "test.h"
+
+void ft_test_putchar_fd(void)
+{
+	printf(MAGENTA"PUTCHAR FD\n"UNCOLOR);
+	/*
+	int fd = open("./test_result_ft_putchar_fd.testresult", O_CREAT | O_WRONLY, S_IRUSR | S_IWUSR);
+	ft_putchar_fd('A', fd);
+	printf("Test file should now contain 'A'.\n");
+	close(fd);*/
+
+	char	buf;
+	int 	fd = open(FPATH, O_WRONLY | O_CREAT, 0666);
+		
+	printf("test - display [J]\n");
+	if (fd != -1)
+	{
+		ft_putchar_fd('J', fd);
+		close(fd);
+		fd = open(FPATH, O_RDONLY);
+		read(fd, &buf, 1);
+		close(fd);
+		printf("[%c]\n", buf);
+		assert(buf == 'J');
+		remove(FPATH);
+	}
+	else printf(RED"opening fd failed\n"UNCOLOR);
+}

@@ -1,0 +1,67 @@
+#include "libft.h"
+#include "test.h"
+
+void ft_test_memcpy(void)
+{
+	printf(MAGENTA"MEMCPY:\n"UNCOLOR);
+
+	printf("test 1\n");
+	char src[10] = "123456789\0";
+	char dst[10] = "abcdefghi\0";
+	//printf("Both functions are set to copy '%s' over on top of '%s'. So the end result should just be '%s'.\n", src, dst, src);
+	//printf("First output is the dst, the one after that is the return value of (ft_)memcpy.\n\n");
+	char* result = memcpy(dst, src, 10);
+	//printf("Built-in:  %s - %s\n", dst, result);
+	char ft_src[10] = "123456789\0";
+	char ft_dst[10] = "abcdefghi\0";
+	char* ft_result = ft_memcpy(ft_dst, ft_src, 10);
+	//printf("ft_memcpy: %s - %s\n", ft_dst, ft_result);
+	if (strcmp(result, ft_result) == 0)
+		printf(GREEN"				OK!\n"UNCOLOR);
+	else
+		printf(RED"				KO!\n"UNCOLOR);
+	
+
+	char	str1[] = "fortytwoaaaaa";
+	char	str2[] = "aaaaaaaaaaaaa";
+	char	str3[] = "fortytwoaaaaa";
+	char	str4[] = "aaaaaaaaaaaaa";
+	size_t 	len = 8;
+
+	printf("test 2\n");
+	if (strcmp(ft_memcpy(str2, str1, len), memcpy(str4, str3, len)) == 0)
+		printf(GREEN"				OK!\n"UNCOLOR);
+	else
+		printf(RED"				KO!\n"UNCOLOR);
+	
+	// new test
+	printf("test 3\n");
+	if (strcmp(ft_memcpy("fortytwoaaaaa", "aaaaaaaaaaaaa", 0), memcpy("fortytwoaaaaa", "aaaaaaaaaaaaa", 0)) == 0)
+		printf(GREEN"				OK!\n"UNCOLOR);
+	else
+		printf(RED"				KO!\n"UNCOLOR);
+
+	printf("test 4\n");
+	printf("orig: [%s]\n", memcpy("JamesBrown", NULL, 0));
+	printf("mine: [%s]\n", ft_memcpy("JamesBrown", NULL, 0));
+	if (strcmp(ft_memcpy("JamesBrown", NULL, 0), memcpy("JamesBrown", NULL, 0)) == 0)
+		printf(GREEN"				OK!\n"UNCOLOR);
+	else
+		printf(RED"				KO!\n"UNCOLOR);
+
+	printf("test 5\n");
+	printf("orig: [%s]\n", memcpy("", NULL, 0));
+	printf("mine: [%s]\n", ft_memcpy("", NULL, 0));
+	if (strcmp(ft_memcpy("", NULL, 0), memcpy("", NULL, 0)) == 0)
+		printf(GREEN"				OK!\n"UNCOLOR);
+	else
+		printf(RED"				KO!\n"UNCOLOR);
+
+	printf("test 6\n");
+	printf("orig: [%s]\n", memcpy(NULL, NULL, 10));
+	printf("mine: [%s]\n", ft_memcpy(NULL, NULL, 10));
+	if (ft_memcpy(NULL, NULL, 10) == NULL && memcpy(NULL, NULL, 10) == NULL)
+		printf(GREEN"				OK!\n"UNCOLOR);
+	else
+		printf(RED"				KO!\n"UNCOLOR);
+}

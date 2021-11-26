@@ -1,0 +1,115 @@
+#include "libft.h"
+#include "test.h"
+
+static int	null_strcat(void)
+{
+	char	src1[] = "hello ";
+	char	src2[] = "world!";
+	char	buf[30];
+	int not_correct = 0;
+	int correct = 1;
+
+	memset(buf, 'a', 30);
+	memcpy(buf, src1, sizeof(char) * (strlen(src1) + 1));
+	ft_strcat(buf, src2);
+	if (strcmp("hello world!", buf) != 0)
+	{
+		printf(RED"test failed: doesn't add null byte\n[%s] + [%s]\nresult: [%s]\n"UNCOLOR, 
+		src1, src2, buf);
+		return (not_correct);
+		//abort();
+	}
+	return (correct);
+}
+
+static int	rand_strcat(size_t max_len, size_t i)
+{
+	char	*str1, *str2, *ft_cat, *libc_cat;
+	size_t	len1 = randi(max_len);
+	size_t	len2 = randi(max_len);
+	int not_correct = 0;
+	int correct = 1;
+
+	str1 = (char *) malloc(sizeof(char) * (len1 + 1));
+	str2 = (char *) malloc(sizeof(char) * (len2 + 1));
+	ft_cat = (char *) malloc(sizeof(char) * (len1 + len2 + 1));
+	libc_cat = (char *) malloc(sizeof(char) * (len1 + len2 + 1));
+	bzero(str1, len1 + 1);
+	bzero(str2, len2 + 1);
+	bzero(ft_cat, len1 + len2 + 1);
+	bzero(libc_cat, len1 + len2 + 1);
+	rand_str(str1, len1);
+	rand_str(str2, len2);
+	ft_cat = ft_strcat(ft_cat, str1);
+	ft_cat = ft_strcat(ft_cat, str2);
+	libc_cat = strcat(libc_cat, str1);
+	libc_cat = strcat(libc_cat, str2);
+	if (strcmp(ft_cat, libc_cat) != 0)
+	{
+		printf(RED"test #%zu failed for strings [%s] + [%s]\nexpected [%s], got [%s]\n"UNCOLOR,
+			   i, str1, str2, libc_cat, ft_cat);
+		return (not_correct);
+		//abort();
+	}
+	free(str1);
+	free(str2);
+	free(ft_cat);
+	free(libc_cat);
+	return (correct);
+}
+
+void	ft_test_strcat(void)
+{
+	printf(MAGENTA"STRCAT:\n"UNCOLOR);
+	int correct = 1;
+	
+	printf("test 1\n");
+
+	char s1[] = "Hello \0     ";
+	//printf("The result should be: 'Hello hello': '%s'\n", ft_strcat(s1, "hello"));
+	if (strcmp(ft_strcat(s1, "hello"), "Hello hello") == 0)
+		printf(GREEN"				OK!\n"UNCOLOR);
+	else
+		printf(RED"				KO!\n"UNCOLOR);
+
+	//test 2
+	printf("test 2\n");
+	char s2[] = "Hello \0     ";
+	//printf("The result should be: 'Hello hi': '%s'\n", ft_strcat(s2, "hi"));
+	if (strcmp(ft_strcat(s2, "hi"), "Hello hi") == 0)
+		printf(GREEN"				OK!\n"UNCOLOR);
+	else
+		printf(RED"				KO!\n"UNCOLOR);
+
+	//test 3
+	printf("test 3\n");
+	char s3[] = "Hello \0     ";
+	//printf("The result should be: 'Hello there': '%s'\n", ft_strcat(s3, "there"));
+	if (strcmp(ft_strcat(s3, "there"), "Hello there") == 0)
+		printf(GREEN"				OK!\n"UNCOLOR);
+	else
+		printf(RED"				KO!\n"UNCOLOR);
+
+	//test 4
+	printf("test 4\n");
+	char s4[] = "Hel";
+	//printf("The result should be: 'Hello ': '%s'\n", ft_strcat(s4, ""));
+	if (strcmp(ft_strcat(s4, ""), "Hel") == 0)
+		printf(GREEN"				OK!\n"UNCOLOR);
+	else
+		printf(RED"				KO!\n"UNCOLOR);
+
+	size_t	tests = 100, i = 0;
+
+	printf("test 5: random strings\n");
+	null_strcat();
+	rand_strcat(0, i++);
+	while (i < tests)
+	{
+		correct = rand_strcat(50, i++);
+	}
+	if (correct == 1)
+		printf(GREEN"				OK!\n"UNCOLOR);
+	else
+		printf(RED"				KO!\n"UNCOLOR);
+}

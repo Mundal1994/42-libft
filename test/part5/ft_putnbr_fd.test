@@ -1,0 +1,53 @@
+#include "libft.h"
+#include "test.h"
+
+static void	validate_putnbr_fd(int n)
+{
+	char	buf[30];
+	char	verif[30];
+	size_t	len;
+
+	bzero(buf, 30);
+	bzero(verif, 30);
+	len = sprintf(verif, "%d", n);
+	int fd = open(FPATH, O_WRONLY | O_CREAT, 0666);
+	if (fd == -1)
+	{
+		printf("opening fd failed\n");
+		return ;
+	}
+	ft_putnbr_fd(n, fd);
+	close(fd);
+	fd = open(FPATH, O_RDONLY);
+	read(fd, buf, len);
+	close(fd);
+	printf("[%s]\n", buf);
+	assert(strcmp(buf, verif) == 0);
+	remove(FPATH);
+}
+
+void	ft_test_putnbr_fd(void)
+{
+	printf(MAGENTA"PUTNBR FD\n"UNCOLOR);
+	/*
+	int fd = open("./test_result_ft_putnbr_fd.txt", O_CREAT | O_WRONLY, S_IRUSR | S_IWUSR);
+	ft_putnbr_fd(0, fd);
+	ft_putchar_fd('\n', fd);
+	ft_putnbr_fd(10, fd);
+	ft_putchar_fd('\n', fd);
+	ft_putnbr_fd(100, fd);
+	ft_putchar_fd('\n', fd);
+	ft_putnbr_fd(1234, fd);
+	ft_putchar_fd('\n', fd);
+	ft_putnbr_fd(2147483647, fd);
+	ft_putchar_fd('\n', fd);
+	ft_putnbr_fd(-2147483648, fd);
+	printf("Test file should now contain: \n0\n10\n100\n1234\n2147483647\n-2147483648\n");
+	close(fd);*/
+
+	validate_putnbr_fd(42);
+	validate_putnbr_fd(-42);
+	validate_putnbr_fd(0);
+	validate_putnbr_fd(INT_MIN);
+	validate_putnbr_fd(INT_MAX);
+}

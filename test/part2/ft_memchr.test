@@ -1,0 +1,146 @@
+#include "libft.h"
+#include "test.h"
+
+static int	found_memchr(size_t max_size, size_t i, int correct)
+{
+	size_t	size = randi(max_size);
+	void	*ptr;
+	char	seek = rand_char();
+	
+	ptr = malloc(size);
+	memset(ptr, rand_char(), size);
+	memset(ptr + randi(size), seek, 1);
+	if (ft_memchr(ptr, seek, size) != memchr(ptr, seek, size))
+	{
+		printf(RED"test #%zu failed (c=%c)\nptr: ["UNCOLOR, i, seek);
+		print_mem(ptr, size);
+		printf("]\n");
+		printf("libc:\t%p\nlibft:\t%p\n", memchr(ptr, seek, size), ft_memchr(ptr, seek, size));
+		correct = 0;
+		abort();
+	}
+	free(ptr);
+	return (correct);
+}
+
+static int	not_found_memchr(size_t max_size, size_t i, int correct)
+{
+	size_t	size = randi(max_size);
+	void	*ptr;
+	
+	ptr = malloc(size);
+	memset(ptr, rand_char(), size);
+	if (ft_memchr(ptr, '\t', size) != memchr(ptr, '\t', size))
+	{
+		printf(RED"test #%zu failed\nptr: ["UNCOLOR, i);
+		print_mem(ptr, size);
+		printf("]\n");
+		printf("libc:\t%p\nlibft:\t%p\n", memchr(ptr, '\t', size), ft_memchr(ptr, '\t', size));
+		correct = 0;
+		abort();
+	}
+	free(ptr);
+	return (correct);
+}
+
+void	ft_test_memchr(void)
+{
+	printf(MAGENTA"MEMCHR:\n"UNCOLOR);
+	//FIRST TEST
+	//CHAR PRESENT
+	printf("memchr look for '4' and size 10.\n");
+	char src[10] = "123456789\0";
+	char* result = memchr(src, '4', 10);
+	printf("Orig: %s -> %s\n", src, result);
+
+	char ft_src[10] = "123456789\0";
+	char* ft_result = ft_memchr(ft_src, '4', 10);
+	printf("Custom:   %s -> %s\n", src, ft_result);
+	if (strcmp(result, ft_result) == 0)
+		printf(GREEN"				OK!\n"UNCOLOR);
+	else
+		printf(RED"				KO!\n"UNCOLOR);
+
+	//CHAR NOT PRESENT
+	printf("memchr look for 'd' and size 10.\n");
+	result = memchr(src, 'd', 10);
+	printf("Orig: %s -> %s\n", src, result);
+
+	ft_result = ft_memchr(ft_src, 'd', 10);
+	printf("Custom:   %s -> %s\n", src, ft_result);
+	if (result == NULL && ft_result == NULL)
+		printf(GREEN"				OK!\n"UNCOLOR);
+	else
+		printf(RED"				KO!\n"UNCOLOR);
+
+	//TOO BIG AND NO CHAR
+	printf("memchr look for 'd' and size 15.\n");
+	result = memchr(src, 'd', 15);
+	printf("Orig: %s -> %s\n", src, result);
+
+	ft_result = ft_memchr(ft_src, 'd', 15);
+	printf("Custom:   %s -> %s\n", src, ft_result);
+	if (result == NULL && ft_result == NULL)
+		printf(GREEN"				OK!\n"UNCOLOR);
+	else
+		printf(RED"				KO!\n"UNCOLOR);
+	
+	//TOO BIG AND A CHAR
+	printf("memchr look for '4' and size 15.\n");
+	result = memchr(src, '4', 15);
+	printf("Orig: %s -> %s\n", src, result);
+
+	ft_result = ft_memchr(ft_src, '4', 15);
+	printf("Custom:   %s -> %s\n", src, ft_result);
+	if (strcmp(result, ft_result) == 0)
+		printf(GREEN"				OK!\n"UNCOLOR);
+	else
+		printf(RED"				KO!\n"UNCOLOR);
+
+	//TOO SMALL AND A CHAR
+	printf("memchr look for '4' , size 2\n");
+	result = memchr(src, '4', 2);
+	printf("Orig: %s -> %s\n", src, result);
+
+	ft_result = ft_memchr(ft_src, '4', 2);
+	printf("Custom:   %s -> %s\n", src, ft_result);
+	if (result == NULL && ft_result == NULL)
+		printf(GREEN"				OK!\n"UNCOLOR);
+	else
+		printf(RED"				KO!\n"UNCOLOR);
+
+	//MIDDLE SIZE AND A CHAR
+	printf("memchr look for '4' + size 5.\n");
+	result = memchr(src, '4', 5);
+	printf("Orig: %s -> %s\n", src, result);
+
+	ft_result = ft_memchr(ft_src, '4', 5);
+	printf("Custom:   %s -> %s\n", src, ft_result);
+	if (strcmp(result, ft_result) == 0)
+		printf(GREEN"				OK!\n"UNCOLOR);
+	else
+		printf(RED"				KO!\n"UNCOLOR);
+
+	//SECOND TEST
+	size_t	tests = 100, i = 0;
+	int correct = 1;
+
+	found_memchr(0, i++, correct);
+	printf("seeking present char\n");
+	while (i < tests)
+	{
+		correct = found_memchr(100, i++, correct);
+		if (correct == 0)
+			printf(RED"					KO!\n"UNCOLOR);
+	}
+	i = 0;
+	printf("seeking missing char\n");
+	while (i < tests)
+	{
+		correct = not_found_memchr(100, i++, correct);
+		if (correct == 0)
+			printf(RED"				KO!\n"UNCOLOR);
+	}
+	if (correct == 1)
+		printf(GREEN"				OK!\n"UNCOLOR);
+}

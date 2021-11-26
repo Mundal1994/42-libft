@@ -1,0 +1,25 @@
+#include "libft.h"
+#include "test.h"
+
+void ft_test_bzero(void);
+void ft_test_memchr(void);
+void ft_test_strchr(void);
+void ft_test_strrchr(void);
+void ft_test_tolower(void);
+void ft_test_toupper(void);
+
+int main(void)
+{
+    ft_test_toupper();
+    print_separator();
+    ft_test_tolower();
+    print_separator();
+    ft_test_memchr();
+    print_separator();
+    ft_test_strchr();
+    print_separator();
+    ft_test_strrchr();
+    print_separator();
+    ft_test_bzero();
+    print_separator();
+}

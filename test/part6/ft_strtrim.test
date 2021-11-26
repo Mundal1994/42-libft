@@ -1,0 +1,75 @@
+#include "libft.h"
+#include "test.h"
+
+void print_result(char *src)
+{
+	printf("Original:\n'%s'\nResult:\n'%s'\n\n", src, ft_strtrim(src));
+}
+
+void ft_test_strtrim(void)
+{
+	printf(MAGENTA"STRTRIM\n"UNCOLOR);
+	/*
+	print_result("Hello world.");
+	print_result("      Hello world.");
+	print_result("Hello world.     ");
+	print_result("     Hello world.     ");
+	print_result("     \t\t\t\tHello world.  \t\t\t\t   ");
+	print_result("              ");
+	print_result(" ");
+	print_result("");*/
+
+	char const	s0[] = "\t\n \t\n \t\n ";
+	char const	s1[] = "\t\n James \t\n Brown \t\n";
+	char const	s2[] = "James \t\n Brown \t\n";
+	char const	s3[] = "\t\n James \t\n Brown";
+	char const	s4[] = "JamesBrown";
+	char const	s5[] = "        f              ";
+	char const	s6[] = "";
+	char const	s7[] = " ";
+	char const	s8[] = "      \t\n ";
+	char const	s9[] = "   , ,hello,,,,  \t\n ";
+	char		*str;
+
+	printf("test - if nothing displays it's correct\n");
+	str = ft_strtrim(s0);
+	//printf("[%s]\n", str);
+	assert(strcmp("", str) == 0);
+	free(str);
+	str = ft_strtrim(s1);
+	//printf("[%s]\n", str);
+	assert(strcmp("James \t\n Brown", str) == 0);
+	free(str);
+	str = ft_strtrim(s2);
+	//printf("[%s]\n", str);
+	assert(strcmp("James \t\n Brown", str) == 0);
+	free(str);
+	str = ft_strtrim(s3);
+	//printf("[%s]\n", str);
+	assert(strcmp("James \t\n Brown", str) == 0);
+	free(str);
+	str = ft_strtrim(s4);
+	//printf("[%s]\n", str);
+	assert(strcmp("JamesBrown", str) == 0);
+	free(str);
+	str = ft_strtrim(s5);
+	//printf("[%s]\n", str);
+	assert(strcmp("f", str) == 0);
+	free(str);
+	str = ft_strtrim(s6);
+	//printf("[%s]\n", str);
+	assert(strcmp("", str) == 0);
+	free(str);
+	str = ft_strtrim(s7);
+	//printf("[%s]\n", str);
+	assert(strcmp("", str) == 0);
+	free(str);
+	str = ft_strtrim(s8);
+	//printf("[%s]\n", str);
+	assert(strcmp("", str) == 0);
+	free(str);
+	str = ft_strtrim(s9);
+	//printf("[%s]\n", str);
+	assert(strcmp(", ,hello,,,,", str) == 0);
+	free(str);
+}

@@ -1,0 +1,22 @@
+#include "libft.h"
+#include "test.h"
+
+void ft_test_memdel(void)
+{
+	printf(MAGENTA"MEMDEL\n"UNCOLOR);
+/*
+	char **test = malloc(sizeof(char *));
+
+	test[0] = malloc(sizeof(char));
+	printf("Allocated memory: %p\n", test[0]);
+	printf("Calling ft_memdel.\n");
+	ft_memdel((void **)test);
+	printf("Pointer should now be null: %p\n", test[0]);*/
+
+	void	*ptr;
+
+	printf("test - if nothing displays it's correct\n");
+	ptr = malloc(8);
+	ft_memdel(&ptr);
+	assert(ptr == 0);
+}

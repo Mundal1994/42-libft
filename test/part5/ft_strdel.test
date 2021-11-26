@@ -1,0 +1,35 @@
+#include "libft.h"
+#include "test.h"
+
+void	ft_test_strdel(void)
+{
+	printf(MAGENTA"STRDEL\n"UNCOLOR);
+	//printf("This test allocates a string and tests if it got deleted.\n\n");
+
+	int size = 5;
+	char *test = malloc(sizeof(char) * size);
+	char **p = &test;
+
+	int i = 0;
+	while (i < size)
+	{
+		test[i] = 'A';
+		i++;
+	}
+
+	//printf("Got this string: %s (%p)\n", test, test);
+	//printf("Deleting string.\n");
+	ft_strdel(p);
+	printf("This pointer should now point to null: %p\n", test);
+	if (test == NULL)
+		printf(GREEN"				OK!\n"UNCOLOR);
+	else
+		printf(RED"				KO!\n"UNCOLOR);
+
+	char	*str;
+
+	printf("test - if nothing displays it's correct\n");
+	str = (char *) malloc(sizeof(char) * 8);
+	ft_strdel(&str);
+	assert(str == 0);
+}

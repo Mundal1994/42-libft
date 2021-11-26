@@ -1,0 +1,31 @@
+#include "libft.h"
+#include "test.h"
+
+void	magic(char *m)
+{
+	write(1, m, 1);
+}
+
+static void	f_striter(char *c)
+{
+	*c = 'a';
+}
+
+void ft_test_striter(void)
+{
+	printf(MAGENTA"STRITER\n"UNCOLOR);
+	/*
+	printf("Using ft_striter to print each character of 'Hello there' individually:\n");
+	ft_striter("Hello there.", &magic);
+	printf("\n");*/
+
+	char	str[] = "fortytwo";
+	int		i;
+
+	printf("test - if nothing displays it's correct\n");
+	ft_striter(str, &f_striter);
+	i = 0;
+	while (i < 8)
+		assert(str[i++] == 'a');
+	assert(str[i] == '\0');
+}

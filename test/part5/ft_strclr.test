@@ -1,0 +1,52 @@
+#include "libft.h"
+#include "test.h"
+
+void	ft_test_strclr(void)
+{
+	printf(MAGENTA"STRCLR\n"UNCOLOR);
+	char test[] = "Hello there.";
+	int len = strlen(test);
+	//printf("Outputting test string:\n");
+	//printf("%s\n", test);
+	//printf("Clearing test string.\n");
+	ft_strclr(test);
+
+	//printf("Checking if all characters were set to null:\n");
+	int all_null = 1;
+	int j = 0;
+	while (j < len && all_null)
+	{
+		if (test[j])
+		{
+			all_null = 0;
+			break;
+		}
+		j++;
+	}
+
+	if (all_null) 
+	{
+		//All characters of the string are null!
+		printf("test 1\n");
+		printf(GREEN"				OK!\n"UNCOLOR);
+	}
+	else
+	{
+		printf(RED"Not all characters were null. Test stopped at: %i\n"UNCOLOR, j);
+	}
+
+	//printf("Printing test string (expect empty line below):\n");
+	//printf("%s\n", test);
+
+	char	str[] = "James";
+	int		i;
+
+	printf("test - if nothing displays it's correct\n");
+	ft_strclr(str);
+	i = 0;
+	while (i <= 5)
+	{
+		assert(str[i] == '\0');
+		i++;
+	}
+}

@@ -1,0 +1,55 @@
+#include "libft.h"
+#include "test.h"
+
+static void	validate_putnbr(int n, char const *expected)
+{
+	FILE	*fd;
+	char	buf[12];
+
+	bzero(buf, 12);
+	fd = freopen(FPATH, "w", stdout);
+	ft_putnbr(n);
+	fclose(fd);
+	fd = fopen(FPATH, "r");
+	fread(buf, 12, 1, fd);
+	fclose(fd);
+	freopen("/dev/tty", "w", stdout);
+	printf("[%s]\n", buf);
+	assert(strcmp(buf, expected) == 0);
+	remove(FPATH);
+}
+
+void	putnbr_test(int nbr) {
+	printf("ft:\n");
+	ft_putnbr(nbr);
+	printf("\nShould be: %i \n\n", nbr);
+}
+
+void	ft_test_putnbr(void)
+{
+	printf(MAGENTA"PUTNBR\n"UNCOLOR);
+/*	putnbr_test(0);
+	putnbr_test(10);
+	putnbr_test(100);
+	putnbr_test(1234);
+	putnbr_test(2147483647);
+	putnbr_test(-2147483648);
+*/
+
+	int	n1 = 42;
+	int	n2 = -42;
+	int	n3 = 0;
+	int n4 = INT_MIN;
+	int	n5 = INT_MAX;
+	char	buf[30];
+
+	validate_putnbr(n1, "42");
+	validate_putnbr(n2, "-42");
+	validate_putnbr(n3, "0");
+	bzero(buf, 30);
+	sprintf(buf, "%d", INT_MIN);
+	validate_putnbr(n4, buf);
+	bzero(buf, 30);
+	sprintf(buf, "%d", INT_MAX);
+	validate_putnbr(n5, buf);
+}

@@ -1,0 +1,55 @@
+#include "libft.h"
+#include "test.h"
+
+void static print_char_array(char *array, int length, int orig)
+{
+	int i;
+
+	i = 0;
+	while (i < length)
+	{
+		if (orig == 0)
+			printf("%i, ", array[i]);
+		else if (array[i] == 0)
+			printf(GREEN"%i, "UNCOLOR, array[i]);
+		else
+			printf(RED"%i, "UNCOLOR, array[i]);
+		i++;
+	}
+	printf("\n");
+}
+
+void	ft_test_bzero(void)
+{
+	printf(MAGENTA"BZERO:\n"UNCOLOR);
+	int orig = 0;
+    char test[] = "abcd";
+	printf("Orig str:	");
+	print_char_array(test, 5, orig);
+	orig = 1;
+	bzero(test, 5);
+	printf("Should output 0: ");
+	print_char_array(test, 5, orig);
+
+	orig = 0;
+	char ft_test[] = "abcd";
+	printf("Orig str:	");
+	print_char_array(ft_test, 5, orig);
+	ft_bzero(ft_test, 5);
+	orig = 1;
+	printf("Should output 0: ");
+	print_char_array(ft_test, 5, orig);
+
+	char	str1[] = "fortytwo";
+	char	str2[] = "fortyone";
+	size_t 	len = strlen(str1);
+
+	printf("\ntest 2:\n");
+	ft_bzero(str1, len);
+	bzero(str2, len);
+	if (memcmp(str1, str2, sizeof(char) * len) == 0)
+		printf(GREEN"				OK!\n"UNCOLOR);
+	else
+		printf(RED"				KO!\n"UNCOLOR);
+	assert(memcmp(str1, str2, sizeof(char) * len) == 0);
+}

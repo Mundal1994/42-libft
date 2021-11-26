@@ -1,0 +1,27 @@
+#include "libft.h"
+#include "test.h"
+
+void	print_comp(char *s1, char *s2)
+{
+	printf("Joining [%s] and [%s]: [%s]\n", s1, s2, ft_strjoin(s1, s2));
+}
+
+void	ft_test_strjoin(void)
+{
+	printf(MAGENTA"STRJOIN\n"UNCOLOR);
+
+	print_comp("Hello ", "James.");
+	print_comp("Hello ", "");
+	print_comp("", "James.");
+	print_comp("", "");
+
+	char const	s1[] = "Hello ";
+	char const	s2[] = "James";
+	char		*str;
+
+	printf("test - if nothing displays it's correct\n");
+	str = ft_strjoin(s1, s2);
+	//printf("%s\n", str);
+	assert(strcmp("Hello James", str) == 0);
+	free(str);
+}

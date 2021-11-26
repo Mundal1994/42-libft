@@ -1,0 +1,31 @@
+#include "libft.h"
+#include "test.h"
+
+char	even_more_magic(char m)
+{
+	return (m - 32);
+}
+
+static char	f_strmap(char c)
+{
+	return (c + 1);
+}
+
+void ft_test_strmap(void)
+{
+	printf(MAGENTA"STRMAP\n"UNCOLOR);
+	/*
+	char test[] = "hello";
+	printf("Using ft_strmap to transform 'hello' to 'HELLO':\n");
+	printf("%s", ft_strmap(test, &even_more_magic));
+	printf("\n");*/
+
+	char const	s1[] = "fortytwo";
+	char		*s2;
+
+	printf("test - if nothing displays it's correct\n");
+	s2 = ft_strmap(s1, &f_strmap);
+	//printf("%s\n", s2);
+	assert(strcmp("gpsuzuxp", s2) == 0);
+	free(s2);
+}

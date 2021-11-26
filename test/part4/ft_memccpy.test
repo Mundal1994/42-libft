@@ -1,0 +1,114 @@
+#include "libft.h"
+#include "test.h"
+
+static int	basic_memccpy(void)
+{
+	char	str[] = "meaning of life is fortytwo";
+	char	buf[30];
+	char	*ptr1, *ptr2;
+
+	bzero(buf, 30);
+	ptr1 = memccpy(buf, str, 'i', 20);
+	ptr2 = ft_memccpy(buf, str, 'i', 20);
+	if (ptr1 != ptr2)
+	{
+		printf(RED"ft_memccpy returned wrong pointer: expected %p, got %p\n", ptr1, ptr2);
+		printf("src:\t[%s], c='i'\nmemccpy:\t[%s]\nft_memccpy:\t[%s]\n"UNCOLOR, str, ptr1, ptr2);
+		return (0);
+		//abort();
+	}
+	return (1);
+}
+
+static int	rand_memccpy(size_t max_len, size_t i, char c)
+{
+	void	*src, *ptr1, *ptr2;
+	size_t	len = randi(max_len);
+
+	src = malloc(len);
+	ptr1 = malloc(len);
+	ptr2 = malloc(len);
+	memset(src, rand_char(), len);
+	if (isprint(c))
+		memset(src + randi(len), c, 1);
+	bzero(ptr1, len);
+	bzero(ptr2, len);
+	memccpy(ptr1, src, c, len);
+	ft_memccpy(ptr2, src, c, len);
+	if (memcmp(ptr1, ptr2, len) != 0)
+	{
+		printf(RED"test #%zu failed ", i);
+		if (isprint(c)) printf("(c=%c)", c);
+		printf("\nsrc\t[");
+		print_mem(src, len);
+		printf("]\nlibc\t[");
+		print_mem(ptr1, len);
+		printf("]\nlibft\t[");
+		print_mem(ptr2, len);
+		printf("]\n"UNCOLOR);
+		return (0);
+		//abort();
+	}
+	free(src);
+	free(ptr1);
+	free(ptr2);
+	return (1);
+}
+
+void ft_test_memccpy(void)
+{
+	printf(MAGENTA"MEMCCPY:\n"UNCOLOR);
+
+	char src[10] = "123456789\0";
+	char dst[10] = "abcdefghi\0";
+
+	//printf("Both functions are set to copy all characters after 'd' from '%s' over on top of '%s'. So the end result should be '1234efghi'.\n", src, dst);
+	//printf("First output is the dst, the one after that is the return value of (ft_)memccpy.\n\n");
+	char* result = memccpy(dst, src, '4', 10);
+	//printf("Built-in:   %s - %s\n", dst, result);
+
+	char ft_src[10] = "123456789\0";
+	char ft_dst[10] = "abcdefghi\0";
+	char* ft_result = ft_memccpy(ft_dst, ft_src, '4', 10);
+	//printf("ft_memccpy: %s - %s\n", ft_dst, ft_result);
+	printf("dst value\n");
+	if (strcmp(dst, ft_dst) == 0)
+		printf(GREEN"				OK!\n"UNCOLOR);
+	else
+		printf(RED"				KO!\n"UNCOLOR);
+	printf("return value\n");
+	if (strcmp(result, ft_result) == 0)
+		printf(GREEN"				OK!\n"UNCOLOR);
+	else
+		printf(RED"				KO!\n"UNCOLOR);
+
+	// test 2
+	size_t	tests = 100, i = 0;
+	int correct = 1;
+
+	basic_memccpy();
+	rand_memccpy(0, i++, '\n');
+	printf("copying with present char\n");
+	while (i < tests)
+	{
+		correct = rand_memccpy(100, i++, rand_char());
+		if (correct == 0)
+			abort();
+	}
+	if (correct == 1)
+		printf(GREEN"				OK!\n"UNCOLOR);
+	else
+		printf(RED"				KO!\n"UNCOLOR);
+	i = 0;
+	printf("copying with missing char\n");
+	while (i < tests)
+	{
+		correct = rand_memccpy(100, i++, '\n');
+		if (correct == 0)
+			abort();
+	}
+	if (correct == 1)
+		printf(GREEN"				OK!\n"UNCOLOR);
+	else
+		printf(RED"				KO!\n"UNCOLOR);
+}

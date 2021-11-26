@@ -1,0 +1,148 @@
+#include "libft.h"
+#include "test.h"
+
+static int	found_strrchr(size_t max_len, char seek, size_t i, int correct)
+{
+	size_t	len = randi(max_len);
+	size_t	hits = 3;
+	char	*str;
+
+	str = (char *) malloc(sizeof(char) * len + 1);
+	rand_str(str, len);
+	while (hits > 0)
+	{
+		str[randi(len)] = seek;
+		hits--;
+	}
+	if (ft_strrchr(str, seek) != strrchr(str, seek))
+	{
+		printf("test #%zu failed (c=%c)\n", i, seek);
+		printf("str: [%s]\nlibc:\t%p\nlibft:\t%p\n", str, strrchr(str, seek), ft_strrchr(str, seek));
+		correct = 0;
+		//abort();
+	}
+	free(str);
+	return (correct);
+}
+
+static int	not_found_strrchr(size_t max_len, char seek, size_t i, int correct)
+{
+	size_t	len = randi(max_len);
+	char	*str;
+
+	str = (char *) malloc(sizeof(char) * len + 1);
+	rand_str(str, len);
+	if (ft_strrchr(str, seek) != strrchr(str, seek))
+	{
+		printf("test #%zu failed\n", i);
+		printf("str: [%s]\nlibc:\t%p\nlibft:\t%p\n", str, strrchr(str, seek), ft_strrchr(str, seek));
+		correct = 0;
+		//abort();
+	}
+	free(str);
+	return (correct);
+}
+
+void	ft_test_strrchr(void)
+{
+	printf(MAGENTA"STRRCHR:\n"UNCOLOR);
+	char s1[] = "Hello";
+	int same = 1;
+
+	printf("Source str: 'Hello'\nLooking for: 'e':\n");
+	same = strcmp(strrchr(s1, 'e'), ft_strrchr(s1, 'e'));
+	if (same == 0)
+		printf(GREEN"				OK!\n"UNCOLOR);
+	else
+	{
+		printf(RED"				KO!\n"UNCOLOR);
+		printf(GREEN"ORIG OUTPUT: %s\n"UNCOLOR, strrchr(s1, 'e'));
+		printf(RED"YOUR OUTPUT: %s\n"UNCOLOR, ft_strrchr(s1, 'e'));
+	}
+	char s2[] = "Hi";
+	printf("Source str: 'Hi'\nLooking for: 'e':\n");
+	if (strrchr(s2, 'e') == NULL && ft_strrchr(s2, 'e') == NULL)
+		printf(GREEN"				OK!\n"UNCOLOR);
+	else
+	{
+		printf(RED"				KO!\n"UNCOLOR);
+		printf(GREEN"ORIG OUTPUT: %s\n"UNCOLOR, strrchr(s2, 'e'));
+		printf(RED"YOUR OUTPUT: %s\n"UNCOLOR, ft_strrchr(s2, 'e'));
+	}
+	printf("Source str: 'Hi'\nLooking for: 'H':\n");
+	same = strcmp(strrchr(s2, 'H'), ft_strrchr(s2, 'H'));
+	if (same == 0)
+		printf(GREEN"				OK!\n"UNCOLOR);
+	else
+	{
+		printf(RED"				KO!\n"UNCOLOR);
+		printf(GREEN"ORIG OUTPUT: %s\n"UNCOLOR, strrchr(s2, 'H'));
+		printf(RED"YOUR OUTPUT: %s\n"UNCOLOR, ft_strrchr(s2, 'H'));
+	}
+	char s3[] = "";
+	printf("Source str: ''\nLooking for: '\\0':\n");
+	same = strcmp(strrchr(s3, '\0'), ft_strrchr(s3, '\0'));
+	if (same == 0)
+		printf(GREEN"				OK!\n"UNCOLOR);
+	else
+	{
+		printf(RED"				KO!\n"UNCOLOR);
+		printf(GREEN"ORIG OUTPUT: %s\n"UNCOLOR, strrchr(s3, '\0'));
+		printf(RED"YOUR OUTPUT: %s\n"UNCOLOR, ft_strrchr(s3, '\0'));
+	}
+	char s4[] = "Hello my name is James.";
+	printf("Source str: 'Hello my name is James.'\nLooking for: 'a':\n");
+	same = strcmp(strrchr(s4, 'a'), ft_strrchr(s4, 'a'));
+	if (same == 0)
+		printf(GREEN"				OK!\n"UNCOLOR);
+	else
+	{
+		printf(RED"				KO!\n"UNCOLOR);
+		printf(GREEN"ORIG OUTPUT: %s\n"UNCOLOR, strrchr(s4, 'a'));
+		printf(RED"YOUR OUTPUT: %s\n"UNCOLOR, ft_strrchr(s4, 'a'));
+	}
+	char s5[] = "No";
+	printf("Source str: 'Nope'\nLooking for: 'a':\n");
+	if (strrchr(s2, 'a') == NULL && ft_strrchr(s2, 'a') == NULL)
+		printf(GREEN"				OK!\n"UNCOLOR);
+	else
+	{
+		printf(RED"				KO!\n"UNCOLOR);
+		printf(GREEN"ORIG OUTPUT: %s\n"UNCOLOR, strrchr(s5, 'a'));
+		printf(RED"YOUR OUTPUT: %s\n"UNCOLOR, ft_strrchr(s5, 'a'));
+	}
+
+	// SECOND TEST
+	size_t	tests = 100, i = 0;
+	int correct = 1;
+
+	not_found_strrchr(0, 'a', i++, correct);
+	printf("seeking present char\n");
+	while (i < tests)
+	{
+		correct = found_strrchr(100, rand_char(), i++, correct);
+		if (correct == 0)
+			printf(RED"				KO!\n"UNCOLOR);
+	}
+	i = 0;
+	printf("seeking missing char\n");
+	while (i < tests)
+	{
+		correct = not_found_strrchr(100, '\t', i++, correct);
+		if (correct == 0)
+			printf(RED"				KO!\n"UNCOLOR);
+	}
+	i = 0;
+	printf("seeking terminator\n");
+	while (i < tests)
+	{
+		correct = not_found_strrchr(100, '\0', i++, correct);
+		if (correct == 0)
+			printf(RED"				KO!\n"UNCOLOR);
+	}
+	if (correct == 1)
+		printf(GREEN"				OK!\n"UNCOLOR);
+	else
+		printf(RED"				KO!\n"UNCOLOR);
+}
+

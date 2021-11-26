@@ -1,0 +1,48 @@
+#include "libft.h"
+#include "test.h"
+
+static int	rand_strdup(size_t max_len, size_t i)
+{
+	size_t	len = randi(max_len);
+	char	*str, *dup;
+
+	str = (char *) malloc(sizeof(char) * (len + 1));
+	rand_str(str, len);
+	dup = ft_strdup(str);
+	if (strcmp(str, dup) != 0)
+	{
+		printf(RED"test #%zu failed\nstr: [%s]\ndup: [%s]\n"UNCOLOR, i, str, dup);
+		return (0);
+		//abort();
+	}
+	free(str);
+	free(dup);
+	return (1);
+}
+
+void ft_test_strdup(void)
+{
+	printf(MAGENTA"STRDUP\n"UNCOLOR);
+	/*
+	printf("This test just duplicates a bunch of string literals and prints them.\n\n");
+
+	printf("Testing 'hello': '%s - '%s'\n", strdup("hello"), ft_strdup("hello"));
+	printf("Testing 'hello world': '%s' - '%s'\n", strdup("hello world"), ft_strdup("hello world"));
+	printf("Testing '': '%s' - '%s'\n", strdup(""), ft_strdup(""));*/
+
+	size_t	tests = 100, i = 0;
+	int correct = 1;
+
+	printf("test random strings\n");
+	rand_strdup(0, i++);
+	while (i < tests)
+	{
+		correct = rand_strdup(100, i++);
+		if (correct == 0)
+			abort();
+	}
+	if (correct == 1)
+		printf(GREEN"				OK!\n"UNCOLOR);
+	else
+		printf(RED"				KO!\n"UNCOLOR);
+}

@@ -1,0 +1,133 @@
+#include "libft.h"
+#include "test.h"
+
+static int	same_memcmp(size_t max_size, size_t i, int correct)
+{
+	size_t	size = randi(max_size), j = 0;
+	void	*ptr1, *ptr2;
+	int		ft_result, libc_result;
+
+	ptr1 = malloc(size);
+	ptr2 = malloc(size);
+	while (j < size)
+		memset(ptr1 + j++, rand_char(), 1);
+	memcpy(ptr2, ptr1, size);
+	if ((ft_result = ft_memcmp(ptr1, ptr2, size)) != (libc_result = memcmp(ptr1, ptr2, size)))
+	{
+		printf("test #%zu failed:\nptr1: [", i);
+		print_mem(ptr1, size);
+		printf("]\nptr2: [");
+		print_mem(ptr2, size);
+		printf("]\ngot %d, expected %d\n", ft_result, libc_result);
+		if (!signtest(ft_result, libc_result))
+		{
+			correct = 0;
+			printf(RED"KO!\n"UNCOLOR);
+			return (correct);
+			abort();
+		}
+		else printf("same sign though, continuing\n");
+	}
+	free(ptr1);
+	free(ptr2);
+	return (correct);
+}
+
+static int	diff_memcmp(size_t max_size_pre, size_t max_size_post, size_t i, int correct)
+{
+	size_t 	size_pre = randi(max_size_pre);
+	size_t 	size_post = randi(max_size_post);
+	size_t	size = size_pre + size_post;
+	size_t	j = 0;
+	void	*ptr1, *ptr2;
+	int		ft_result, libc_result;
+
+	ptr1 = malloc(size_pre + size_post);
+	ptr2 = malloc(size_pre + size_post);
+	while (j < size_pre)
+		memset(ptr1 + j++, rand_char(), 1);
+	memcpy(ptr2, ptr1, size_pre);
+	while (j < size)
+	{
+		memset(ptr1 + j, rand_char(), 1);
+		memset(ptr2 + j, rand_char(), 1);
+		j++;
+	}
+	if ((ft_result = ft_memcmp(ptr1, ptr2, size)) != (libc_result = memcmp(ptr1, ptr2, size)))
+	{
+		printf("test #%zu failed (size_pre=%zu, size_post=%zu, size=%zu)\nptr1: [", i, size_pre, size_post, size);
+		print_mem(ptr1, size);
+		printf("]\nptr2: [");
+		print_mem(ptr2, size);
+		printf("]\ngot %d, expected %d\n", ft_memcmp(ptr1, ptr2, size), memcmp(ptr1, ptr2, size));
+		if (!signtest(ft_result, libc_result))
+		{
+			correct = 0;
+			printf(RED"KO!\n"UNCOLOR);
+			return (correct);
+			abort();
+		}
+		else printf("same sign though, continuing\n");
+	}
+	free(ptr1);
+	free(ptr2);
+	return (correct);
+}
+
+void ft_test_memcmp(void)
+{
+	printf(MAGENTA"MEMCMP:\n"UNCOLOR);
+	
+	char src1[10] = "123456789\0";
+	char dst1[10] = "123456789\0";
+	printf("Comparing %s to %s\n", src1, dst1);
+	int result1 = memcmp(dst1, src1, 10);
+	printf("Built-in: %i\n", result1);
+	char ft_src1[10] = "123456789\0";
+	char ft_dst1[10] = "123456789\0";
+	int ft_result1 = ft_memcmp(ft_dst1, ft_src1, 10);
+	printf("Custom:   %i\n", ft_result1);
+	if (result1 == ft_result1)
+		printf(GREEN"				OK!\n"UNCOLOR);
+	else
+		printf(RED"				KO!\n"UNCOLOR);
+
+	char src2[10] = "123456789\0";
+	char dst2[10] = "12cdefghi\0";
+	int result2 = memcmp(dst2, src2, 10);
+	printf("Comparing %s to %s\n", src2, dst2);
+	printf("Built-in: %i\n", result2);
+	char ft_src2[10] = "123456789\0";
+	char ft_dst2[10] = "12cdefghi\0";
+	int ft_result2 = ft_memcmp(ft_dst2, ft_src2, 10);
+	printf("Custom:   %i\n", ft_result2);
+	if (result2 == ft_result2)
+		printf(GREEN"				OK!\n"UNCOLOR);
+	else
+		printf(RED"				KO!\n"UNCOLOR);
+
+	// SECOND TEST
+	size_t	tests = 100, i = 0;
+	int correct = 1;
+
+	printf("comparing similar pointers\n");
+	correct = same_memcmp(0, i++, correct);
+	while (i < tests)
+	{
+		correct = same_memcmp(100, i++, correct);
+		if (correct == 0)
+			printf(RED"				KO!\n"UNCOLOR);
+	}
+	i = 0;
+	printf("comparing differing pointers\n");
+	while (i < tests)
+	{	
+		correct = diff_memcmp(100,50, i++, correct);
+		if (correct == 0)
+			printf(RED"				KO!\n"UNCOLOR);
+	}
+	if (correct == 1)
+		printf(GREEN"				OK!\n"UNCOLOR);
+	else
+		printf(RED"				KO!\n"UNCOLOR);
+}

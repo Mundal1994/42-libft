@@ -1,0 +1,31 @@
+#include "libft.h"
+#include "test.h"
+
+static int	validate_charconv(int (*ft_func)(int), int (*lib_func)(int), int correct)
+{
+	int c;
+
+	c = 0;
+	while (c <= CHAR_MAX)
+	{
+		if (ft_func(c) != lib_func(c))
+		{
+			printf(RED"failed for c=%d [%c]\n"UNCOLOR, c, c);
+			correct = 0;
+			//abort();
+		}
+		c++;
+	}
+	return (correct);
+}
+
+void	ft_test_toupper(void)
+{
+   	printf(MAGENTA"TOUPPER:\n"UNCOLOR);
+	int correct = 1;
+	correct = validate_charconv(&ft_toupper, &toupper, correct);
+	if (correct == 1)
+		printf(GREEN"				OK!\n"UNCOLOR);
+	else
+		printf(RED"				KO!\n"UNCOLOR);
+}

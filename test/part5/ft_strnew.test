@@ -1,0 +1,44 @@
+#include "libft.h"
+#include "test.h"
+
+void	ft_test_strnew(void)
+{
+	printf(MAGENTA"STRNEW\n"UNCOLOR);
+	
+	int		i;
+	int		size;
+	char	*result;
+
+	i = 0;
+	size = 5;
+	//ft_putendl("Allocating a new string, with a size of five, and printing each character and final null byte:");
+	result = ft_strnew(size);
+	while (i < size + 1)
+	{
+		printf("test %d\n", i);
+		if (!result[i])
+		{
+			//correctly is null
+			ft_putendl(GREEN"				OK!\n"UNCOLOR);
+		}
+		else
+		{
+			ft_putchar(result[i]);
+			ft_putchar('\n');
+			printf(RED"				KO!\n"UNCOLOR);
+		}
+		i++;
+	}
+
+	char *str0 = "JamesBrown";
+	char *str1;
+
+	printf("before should be 0, 0, etc... and after should be\n");
+	str1 = ft_strnew(strlen(str0));
+	printf("before strnew:\t{");
+	print_mem_val(str1, strlen(str0) + 1);
+	printf("}\nafter strnew:\t[");
+	strcpy(str1, str0);
+	printf("%s]\n", str1);
+	free(str1);
+}

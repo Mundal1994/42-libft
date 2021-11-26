@@ -1,0 +1,37 @@
+#include "libft.h"
+#include "test.h"
+
+void	more_magic(unsigned int i, char *m)
+{
+	if (i % 2 == 0)
+		write(1, m, 1);
+	else
+		ft_putchar('/');
+}
+
+static void	f_striteri(unsigned int i, char *c)
+{
+	*c = '0' + i;
+}
+
+void ft_test_striteri(void)
+{
+	printf(MAGENTA"STRITERI\n"UNCOLOR);
+	/*
+	printf("Using ft_striteri to print 'Hello there', but every other letter is: '/'\n");
+	ft_striteri("Hello there", &more_magic);
+	printf("\n");*/
+
+	char	str[] = "fortytwo";
+	int		i;
+
+	printf("test - if nothing displays it's correct\n");
+	ft_striteri(str, &f_striteri);
+	i = 0;
+	while (i < 8)
+	{
+		assert(str[i] == '0' + i);
+		i++;
+	}
+	assert(str[i] == '\0');
+}

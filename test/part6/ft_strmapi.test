@@ -1,0 +1,31 @@
+#include "libft.h"
+#include "test.h"
+
+char	magic_magic(unsigned int i, char m)
+{
+	return (m + i);
+}
+
+static char	f_strmapi(unsigned int i, char c)
+{
+	return (c + i);
+}
+
+void ft_test_strmapi(void)
+{
+	printf(MAGENTA"STRMAPI\n"UNCOLOR);
+	/*
+	char test[] = "hello";
+	printf("Using ft_strmapi to transform 'hello' into 'hfnos' by adding the index of each character to itself:\n");
+	printf("%s", ft_strmapi(test, &magic_magic));
+	printf("\n");*/
+
+	char const	s1[] = "00000000";
+	char		*s2;
+
+	printf("test - if nothing displays it's correct\n");
+	s2 = ft_strmapi(s1, &f_strmapi);
+	//printf("%s\n", s2);
+	assert(strcmp("01234567", s2) == 0);
+	free(s2);
+}

@@ -1,0 +1,31 @@
+#include "libft.h"
+#include "test.h"
+
+void	ft_test_putchar(void)
+{
+	printf(MAGENTA"PUTCHAR\n"UNCOLOR);
+	/*printf("This should print 'Hello', followed by a newline:\n");
+	ft_putchar('H');
+	ft_putchar('e');
+	ft_putchar('l');
+	ft_putchar('l');
+	ft_putchar('o');
+	ft_putchar('\n');
+	printf("\n");*/
+
+	FILE	*fd;
+	char	*c;
+
+	printf("display - [J]\n");
+	c = (char *) malloc(sizeof(char));
+	fd = freopen(FPATH, "w", stdout);
+	ft_putchar('J');
+	fclose(fd);
+	fd = fopen(FPATH, "r");
+	*c = fgetc(fd);
+	fclose(fd);
+	freopen("/dev/tty", "w", stdout);
+	printf("[%c]\n", *c);
+	assert(*c == 'J');
+	remove(FPATH);
+}

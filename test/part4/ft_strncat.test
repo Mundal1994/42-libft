@@ -1,0 +1,114 @@
+#include "libft.h"
+#include "test.h"
+
+static void	null_strncat(void)
+{
+	char	src1[] = "hello ";
+	char	src2[] = "world!!!";
+	char	buf[30];
+
+	memset(buf, 'a', 30);
+	memcpy(buf, src1, sizeof(char) * (strlen(src1) + 1));
+	ft_strncat(buf, src2, sizeof(char) * 6);
+	if (strcmp("hello world!", buf) != 0)
+	{
+		printf(RED"test failed: doesn't add null byte\n[%s] + [%s] (n=6)\nresult: [%s]\n"UNCOLOR, 
+		src1, src2, buf);
+		abort();
+	}
+}
+
+static void	ret_strncat(void)
+{
+	char *str = "Meaning of life,\0 universe and everything\0is Forty-Two.\n";
+	char buff1[42] = "vogon constructor fleet";
+	char buff2[42] = "vogon constructor fleet";
+	size_t max = strlen("Meaning of life,\0 universe and everything\0is Forty-Two.\n") + 4;
+	size_t r1 = strlcat(buff1, str, max);
+	size_t r2 = ft_strlcat(buff2, str, max);
+
+	if (r1 != r2)
+	{
+		printf(RED"failed when destsize is less than dest\nlibc\t[%s](%zu)\nftlib\t[%s](%zu)\n"UNCOLOR,
+			   	buff1, r1, buff2, r2);
+		abort();
+	}
+	char s1[4] = "";
+	char s2[4] = "";
+	r1 = strlcat(s1, "thx to ntoniolo for this test !", 4);
+	r2 = ft_strlcat(s2, "thx to ntoniolo for this test !", 4);
+	if (r1 != r2)
+	{
+		printf(RED"failed when dest is empty string\nlibc\t[%s](%zu)\nlibft\t[%s](%zu)\n"UNCOLOR,
+			   	s1, r1, s2, r2);
+		abort();
+	}
+}
+
+static int	rand_strncat(size_t max_len, size_t i)
+{
+	char	*str1, *str2, *ft_cat, *libc_cat;
+	size_t	len1 = randi(max_len);
+	size_t	len2 = randi(max_len);
+	size_t	n = randi(len2);
+
+	str1 = (char *) malloc(sizeof(char) * (len1 + 1));
+	str2 = (char *) malloc(sizeof(char) * (len2 + 1));
+	ft_cat = (char *) malloc(sizeof(char) * (len1 + len2 + 1));
+	libc_cat = (char *) malloc(sizeof(char) * (len1 + len2 + 1));
+	bzero(str1, len1 + 1);
+	bzero(str2, len2 + 1);
+	bzero(ft_cat, len1 + len2 + 1);
+	bzero(libc_cat, len1 + len2 + 1);
+	rand_str(str1, len1);
+	rand_str(str2, len2);
+	ft_cat = ft_strncat(ft_cat, str1, len1);
+	ft_cat = ft_strncat(ft_cat, str2, n);
+	libc_cat = strncat(libc_cat, str1, len1);
+	libc_cat = strncat(libc_cat, str2, n);
+	if (strcmp(ft_cat, libc_cat) != 0)
+	{
+		printf(RED"test #%zu failed for strings [%s] + [%s] n=%zu\nexpected [%s], got [%s]\n"UNCOLOR,
+			   i, str1, str2, n, libc_cat, ft_cat);
+		return (0);
+		//abort();
+	}
+	free(str1);
+	free(str2);
+	free(ft_cat);
+	free(libc_cat);
+	return (1);
+}
+
+void	ft_test_strncat(void)
+{
+	printf(MAGENTA"STRNCAT:\n"UNCOLOR);
+/*	printf("This test just concatenates two words together, up to X chars. The intended result is on the left.\n\n");
+
+	char s1[] = "Hello\0     ";
+	printf("'HelloHello': '%s'\n", ft_strncat(s1, "Hello", 5));
+	char s2[] = "Hello\0     ";
+	printf("'HelloHi': '%s'\n", ft_strncat(s2, "Hi", 2));
+	char s3[] = "Hello\0     ";
+	printf("'HelloThe': '%s'\n", ft_strncat(s3, "There", 3));
+	char s4[] = "Hello\0     ";
+	printf("'Hello': '%s'\n", ft_strncat(s4, "This should not be displayed.", 0));
+*/
+	size_t	tests = 100, i = 0;
+	int correct = 1;
+
+	printf("test random strings\n");
+	null_strncat();
+	ret_strncat();
+	rand_strncat(0, i++);
+	while (i < tests)
+	{
+		correct = rand_strncat(50, i++);
+		if (correct == 0)
+			abort();
+	}
+	if (correct == 1)
+		printf(GREEN"				OK!\n"UNCOLOR);
+	else
+		printf(RED"				KO!\n"UNCOLOR);
+}

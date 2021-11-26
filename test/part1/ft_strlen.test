@@ -1,0 +1,35 @@
+#include "libft.h"
+#include "test.h"
+
+static void	rand_strlen(size_t max_len, size_t i, int correct)
+{
+	char	*str;
+	size_t	cur_len = randi(max_len);
+
+	str = (char *) malloc(sizeof(char) * (cur_len + 1));
+	str = rand_str(str, cur_len);
+	if (ft_strlen(str) != strlen(str))
+	{
+		printf(RED"test #%zu: failed for str [%s]\n"UNCOLOR, i, str);
+		correct = 0;
+		abort();
+	}
+	free(str);
+}
+
+void ft_test_strlen(void)
+{
+	printf(MAGENTA"STRLEN:		"UNCOLOR);
+	printf("Testing random strings.	");
+
+	size_t	tests = 100;
+	size_t	i = 0;
+	size_t	max_len = 1000;
+	size_t	correct = 1;
+
+	rand_strlen(0, i++, correct);
+	while (i < tests)
+		rand_strlen(max_len, i++, correct);
+	if (correct == 1)
+		printf(GREEN"OK!\n"UNCOLOR);
+}

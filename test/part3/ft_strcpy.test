@@ -1,0 +1,52 @@
+#include "libft.h"
+#include "test.h"
+
+static int	rand_strcpy(size_t max_len, size_t i)
+{
+	size_t	buf_extra = 5;
+	size_t	len = randi(max_len);
+	char	*str, *cpy;
+
+	str = (char *) malloc(sizeof(char) * (len + 1));
+	cpy = (char *) malloc(sizeof(char) * (len + buf_extra + 1));
+	memset(cpy, 'a', len + buf_extra + 1);
+	rand_str(str, len);
+	ft_strcpy(cpy, str);
+	if (strcmp(str, cpy) != 0)
+	{
+		printf(RED"test #%zu failed\nstr: [%s]\ncpy: [%s]\n"UNCOLOR, i, str, cpy);
+		return (0);
+		//abort();
+	}
+	free(str);
+	free(cpy);
+	return (1);
+}
+
+void	ft_test_strcpy(void)
+{
+	printf(MAGENTA"STRCPY:\n"UNCOLOR);
+/*
+	char s1[] = "00000";
+	printf("The result should be: 'Hello': '%s'\n", ft_strcpy(s1, "Hello"));
+	printf("The result should be: 'Hi': '%s'\n", ft_strcpy(s1, "Hi"));
+	printf("The result should be: 'There': '%s'\n", ft_strcpy(s1, "There"));
+	printf("The result should be: '': '%s'\n", ft_strcpy(s1, ""));
+*/
+	// test random strings
+	size_t	tests = 100, i = 0;
+	int correct = 1;
+
+	printf("test random string\n");
+	rand_strcpy(0, i++);
+	while (i < tests)
+	{
+		correct = rand_strcpy(100, i++);
+		if (correct == 0)
+			abort();
+	}
+	if (correct == 1)
+		printf(GREEN"				OK!\n"UNCOLOR);
+	else
+		printf(RED"				KO!\n"UNCOLOR);
+}

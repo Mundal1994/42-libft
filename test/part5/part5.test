@@ -1,0 +1,55 @@
+#include "libft.h"
+#include "test.h"
+
+void ft_test_memalloc();
+void ft_test_putchar();
+void ft_test_putstr();
+void ft_test_putendl();
+void ft_test_putnbr();
+void ft_test_strnew();
+void ft_test_strdel();
+void ft_test_strclr();
+void ft_test_strequ();
+void ft_test_strnequ();
+void ft_test_strsub();
+void ft_test_strjoin();
+void ft_test_putchar_fd();
+void ft_test_putstr_fd();
+void ft_test_putendl_fd();
+void ft_test_putnbr_fd();
+
+int main(void)
+{
+    ft_test_memalloc();
+    print_separator();
+    ft_test_putchar();
+    print_separator();
+    ft_test_putstr();
+    print_separator();
+    ft_test_putendl();
+    print_separator();
+    ft_test_putnbr();
+    print_separator();
+    ft_test_strnew();
+    print_separator();
+    ft_test_strdel();
+    print_separator();
+    ft_test_strclr();
+    print_separator();
+    ft_test_strequ();
+    print_separator();
+    ft_test_strnequ();
+    print_separator();
+    ft_test_strsub();
+    print_separator();
+    ft_test_strjoin();
+    print_separator();
+    ft_test_putchar_fd();
+    print_separator();
+    ft_test_putstr_fd();
+    print_separator();
+    ft_test_putendl_fd();
+    print_separator();
+    ft_test_putnbr_fd();
+    print_separator();
+}

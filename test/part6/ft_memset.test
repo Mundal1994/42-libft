@@ -1,0 +1,52 @@
+#include "libft.h"
+#include "test.h"
+
+void	ft_test_memset(void)
+{
+	printf(MAGENTA"MEMSET\n"UNCOLOR);
+	/*
+	int test1length = sizeof(char) * 6;
+	char *test1ft = malloc(test1length);
+	char *test1base = malloc(test1length);
+
+	ft_memset((void *)test1ft, 'Q', 6);
+	memset((void *)test1base, 'Q', 6);
+
+	printf("Setting all to Q:\n");
+
+	printf("ft_memset:\n");
+	int i = 0;
+	while (i < 7)
+	{
+		printf("%c", test1ft[i]);
+		i++;
+	}
+
+	printf("\n");
+
+	printf("Built-in memset:\n");
+	i = 0;
+	while (i < 7)
+	{
+		printf("%c", test1base[i]);
+		i++;
+	}
+
+	printf("\n");*/
+
+	char	*ptr1 = NULL;
+	char	*ptr2 = NULL;
+	char	c = rand_char();
+
+	printf("test - if nothing displays it's correct\n");
+	ptr1 = (char *) malloc(sizeof(char) * 9);
+	ptr2 = (char *) malloc(sizeof(char) * 9);
+	bzero(ptr1, 9);
+	bzero(ptr2, 9);
+	ft_memset(ptr1, c, sizeof(char) * 8);
+	memset(ptr2, c, sizeof(char) * 8);
+	//printf("[%s] vs [%s]\n", ptr1, ptr2);
+	assert(memcmp(ptr1, ptr2, sizeof(char) * 8) == 0);
+	free(ptr1);
+	free(ptr2);
+}

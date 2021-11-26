@@ -1,0 +1,34 @@
+#include "libft.h"
+#include "test.h"
+
+void ft_test_memset(void);
+void ft_test_memdel(void);
+void ft_test_striter(void);
+void ft_test_striteri(void);
+void ft_test_strmap(void);
+void ft_test_strmapi(void);
+void ft_test_strtrim(void);
+void ft_test_strsplit(void);
+void ft_test_itoa(void);
+
+int main(void)
+{
+    ft_test_memset();
+    print_separator();
+    ft_test_memdel();
+    print_separator();
+    ft_test_striter();
+    print_separator();
+    ft_test_striteri();
+    print_separator();
+    ft_test_strmap();
+    print_separator();
+    ft_test_strmapi();
+    print_separator();
+    ft_test_strtrim();
+    print_separator();
+    ft_test_strsplit();
+    print_separator();
+    ft_test_itoa();
+    print_separator();
+}

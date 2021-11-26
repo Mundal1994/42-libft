@@ -1,0 +1,119 @@
+#include "libft.h"
+#include "test.h"
+/*
+void	print_comparison(char *s1, char *s2, char *(*f)(const char *, const char *))
+{
+	printf("Comparing: '%s' and '%s': %s\n", s1, s2, f(s1, s2));
+}
+
+void	ft(void)
+{
+	printf("--- FT\n");
+	print_comparison("Haystack", "Hay", &ft_strstr);
+	print_comparison("Haystack", "stack", &ft_strstr);
+	print_comparison("Haystack", "Nope", &ft_strstr);
+	print_comparison("Haystack", "Haystack", &ft_strstr);
+	print_comparison("", "Haystack", &ft_strstr);
+	print_comparison("Haystack", "", &ft_strstr);
+	// print_comparison(NULL, "Haystack", &ft_strstr);
+	// print_comparison("Haystack", NULL, &ft_strstr);
+	printf("--- FT\n");
+}
+
+void	builtin(void)
+{
+	printf("--- BUILTIN\n");
+	print_comparison("Haystack", "Hay", &strstr);
+	print_comparison("Haystack", "stack", &strstr);
+	print_comparison("Haystack", "Nope", &strstr);
+	print_comparison("Haystack", "Haystack", &strstr);
+	print_comparison("", "Haystack", &strstr);
+	print_comparison("Haystack", "", &strstr);
+	// print_comparison(NULL, "Haystack", &strstr);
+	// print_comparison("Haystack", NULL, &strstr);
+	printf("--- BUILTIN\n");
+}
+*/
+
+static int	found_strstr(size_t max_haystack, size_t i)
+{
+	size_t	haystack_len = randi(max_haystack);
+	size_t	needle_len = randi(haystack_len);
+	char	*haystack, *needle;
+
+	haystack = (char *) malloc(sizeof(char) * (haystack_len + 1));
+	needle = (char *) malloc(sizeof(char) * (needle_len + 1));
+	rand_str(haystack, haystack_len);
+	rand_str(needle, needle_len);
+	memcpy(haystack + (randi(haystack_len - needle_len)), needle, needle_len);
+	if (ft_strstr(haystack, needle) != strstr(haystack, needle))
+	{
+		printf(RED"test #%zu failed\nhystck:\t[%s]\nneedle:\t[%s]\n"UNCOLOR,
+				i, haystack, needle);
+		printf("libc:\t%p\nlibft:\t%p\n", strstr(haystack, needle),
+				ft_strstr(haystack, needle));
+		return (0);
+	}
+	free(haystack);
+	free(needle);
+	return (1);
+}
+
+static int	not_found_strstr(size_t max_haystack, size_t i)
+{
+	size_t	haystack_len = randi(max_haystack);
+	size_t	needle_len = randi(haystack_len);
+	char	*haystack, *needle;
+
+	haystack = (char *) malloc(sizeof(char) * (haystack_len + 1));
+	needle = (char *) malloc(sizeof(char) * (needle_len + 1));
+	rand_str(haystack, haystack_len);
+	rand_str(needle, needle_len);
+	if (ft_strstr(haystack, needle) != strstr(haystack, needle))
+	{
+		printf(RED"test #%zu failed\nhystck:\t[%s]\nneedle:\t[%s]\n"UNCOLOR,
+				i, haystack, needle);
+		printf("libc:\t%p\nlibft:\t%p\n", strstr(haystack, needle),
+				ft_strstr(haystack, needle));
+		return (0);
+	}
+	free(haystack);
+	free(needle);
+	return (1);
+}
+
+void	ft_test_strstr(void)
+{
+	printf(MAGENTA"STRSTR\n"UNCOLOR);
+	/*ft();
+	printf("\n\n\n");
+	builtin();
+*/
+	size_t	tests = 100, i = 0;
+	int correct = 1;
+	found_strstr(0, i++);
+	printf("seeking present needle\n");
+	while (i < tests)
+	{
+		correct = found_strstr(30, i++);
+		if (correct == 0)
+			abort();
+	}
+	if (correct == 1)
+		printf(GREEN"				OK!\n"UNCOLOR);
+	else
+		printf(RED"				KO!\n"UNCOLOR);
+	i = 0;
+	printf("seeking missing needle\n");
+	while (i < tests)
+	{
+		correct = not_found_strstr(50, i++);
+		if (correct == 0)
+			abort();
+	}
+	if (correct == 1)
+		printf(GREEN"				OK!\n"UNCOLOR);
+	else
+		printf(RED"				KO!\n"UNCOLOR);
+}
+

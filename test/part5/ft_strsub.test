@@ -1,0 +1,58 @@
+#include "libft.h"
+#include "test.h"
+
+void	ft_test_strsub(void)
+{
+	printf(MAGENTA"STRSUB\n"UNCOLOR);
+/*
+	char*			t1 = "";
+	unsigned int	t1start = 10;
+	size_t			t1size = ft_strlen(t1);
+	//printf("'%s' split at %u with size of %zu becomes: '%s'\n", t1, t1start, t1size, ft_strsub(t1, t1start, t1size));
+	printf("Expected: []	");
+	printf("Output: [%s]\n", ft_strsub(t1, t1start, t1size));
+
+	t1 = "\200";
+	t1start = 0;
+	t1size = ft_strlen(t1);
+	//printf("'%s' split at %u with size of %zu becomes: '%s'\n", t1, t1start, t1size, ft_strsub(t1, t1start, t1size));
+	printf("Expected: []	");
+	printf("Output: [%s]\n", ft_strsub(t1, t1start, t1size));
+
+	t1 = "Hello";
+	t1start = 0;
+	t1size = ft_strlen(t1);
+	//printf("'%s' split at %u with size of %zu becomes: '%s'\n", t1, t1start, t1size, ft_strsub(t1, t1start, t1size));
+	printf("Expected: [Hello]	");
+	printf("Output: [%s]\n", ft_strsub(t1, t1start, t1size));
+
+	t1 = "Hello";
+	t1start = 3;
+	t1size = 2;
+	//printf("'%s' split at %u with size of %zu becomes: '%s'\n", t1, t1start, t1size, ft_strsub(t1, t1start, t1size));
+	printf("Expected: [lo]	");
+	printf("Output: [%s]\n", ft_strsub(t1, t1start, t1size));
+
+	t1 = "Hello My Name Is James";
+	t1start = 0;
+	t1size = 3;
+	//printf("'%s' split at %u with size of %zu becomes: '%s'\n", t1, t1start, t1size, ft_strsub(t1, t1start, t1size));
+	printf("Expected: [Hel]	");
+	printf("Output: [%s]\n", ft_strsub(t1, t1start, t1size));
+
+	t1 = "Hello My Name Is James";
+	t1start = 11;
+	t1size = 30;
+	//printf("'%s' split at %u with size of %zu becomes: '%s'\n", t1, t1start, t1size, ft_strsub(t1, t1start, t1size));
+	printf("Expected: []	");
+	printf("Output: [%s]\n", ft_strsub(t1, t1start, t1size));*/
+
+	char const	s1[] = "Hello my name is James Brown.";
+	char		*s2;
+
+	printf("test - if nothing displays it's correct\n");
+	s2 = ft_strsub(s1, 17, 5);
+	//printf("%s\n", s2);
+	assert(strcmp("James", s2) == 0);
+	free(s2);
+}
