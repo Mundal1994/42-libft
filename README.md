@@ -3,4 +3,5 @@ Re-code several functions of the standard C library, as well as other utility fu
 
 I have fully made the libft functions myself.
 
-The test files are a mix between my own and friends of mines tests (shoutout Tpolonen for sharing his test file with me).
+The test files are a mix between my own and friends of mines tests. Thank you Tpolonen (https://github.com/kyyninen) for sharing your test files with me. Thank you Jumanner 
+for showing me how to make the structure of the testfile and Makefile.
