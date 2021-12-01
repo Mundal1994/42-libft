@@ -25,10 +25,21 @@ void ft_test_strdup(void)
 	printf(MAGENTA"STRDUP\n"UNCOLOR);
 	/*
 	printf("This test just duplicates a bunch of string literals and prints them.\n\n");
+*/
+	printf("Testing [hello]:[%s] - [%s]\n", strdup("hello"), ft_strdup("hello"));
+	printf("Testing [hello world]: [%s] - [%s]\n", strdup("hello world"), ft_strdup("hello world"));
+	printf("Testing [""]: [%s] - [%s]\n", strdup(""), ft_strdup(""));
 
-	printf("Testing 'hello': '%s - '%s'\n", strdup("hello"), ft_strdup("hello"));
-	printf("Testing 'hello world': '%s' - '%s'\n", strdup("hello world"), ft_strdup("hello world"));
-	printf("Testing '': '%s' - '%s'\n", strdup(""), ft_strdup(""));*/
+	printf("empty string test - can't trust\n");
+	int same = strcmp(strdup(""), ft_strdup(""));
+	if (same == 0)
+		printf(GREEN"				OK!\n"UNCOLOR);
+	else
+	{
+		printf(RED"				KO!\n"UNCOLOR);
+		printf(GREEN"ORIG OUTPUT: %s\n"UNCOLOR, strdup(""));
+		printf(RED"YOUR OUTPUT: %s\n"UNCOLOR, ft_strdup(""));
+	}
 
 	size_t	tests = 100, i = 0;
 	int correct = 1;
