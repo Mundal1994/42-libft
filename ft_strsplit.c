@@ -6,13 +6,11 @@
 /*   By: molesen <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 09:17:57 by molesen           #+#    #+#             */
-/*   Updated: 2021/11/25 13:16:32 by molesen          ###   ########.fr       */
+/*   Updated: 2021/11/26 17:33:31 by molesen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-#include<stdio.h>
 
 static char	**ft_strsplit_calc(char **dest, char *pnt, char c)
 {
@@ -31,7 +29,7 @@ static char	**ft_strsplit_calc(char **dest, char *pnt, char c)
 			len = ft_strlen_stop(&pnt[i], c);
 			dest[word] = (char *)malloc(sizeof(char) * (len + 1));
 			if (!dest[word])
-				return (ft_free2d(&dest[word]));
+				return (ft_free2d(dest));
 			ft_strncpy(dest[word], &pnt[i], len);
 			dest[word][len] = '\0';
 			word++;
@@ -56,11 +54,7 @@ char	**ft_strsplit(char const *s, char c)
 		dest = (char **)malloc(sizeof(char *) * (word_count + 1));
 		if (!dest)
 			return (NULL);
-		ft_strsplit_calc(dest, pnt, c);
-		/*ft_free2d(dest);
-		printf("%p\n", dest[0]);
-		printf("%p\n", dest[1]);
-		printf("%p\n", dest);*/
+		dest = ft_strsplit_calc(dest, pnt, c);
 	}
 	return (dest);
 }

@@ -6,23 +6,21 @@
 /*   By: molesen <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 10:55:42 by molesen           #+#    #+#             */
-/*   Updated: 2021/11/24 11:21:05 by molesen          ###   ########.fr       */
+/*   Updated: 2021/11/26 17:32:58 by molesen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 char	**ft_free2d(char **dest)
-{
+{	
 	size_t	str;
 
 	str = 0;
-	while (dest[str])
+	while (dest[str] != 0)
 	{
-		free(dest[str]);
+		ft_strdel(&dest[str]);
 		str++;
 	}
-	free(dest);
-	dest = NULL;
-	return (dest);
+	return (NULL);
 }

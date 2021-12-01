@@ -28,7 +28,7 @@ void ft_test_strtrim(void)
 	char const	s6[] = "";
 	char const	s7[] = " ";
 	char const	s8[] = "      \t\n ";
-	char const	s9[] = "   , ,hello,,,,  \t\n ";
+	char const	s9[] = "   \v, ,hello,,,,  \t\n ";
 	char		*str;
 
 	printf("test - if nothing displays it's correct\n");
@@ -70,6 +70,6 @@ void ft_test_strtrim(void)
 	free(str);
 	str = ft_strtrim(s9);
 	//printf("[%s]\n", str);
-	assert(strcmp(", ,hello,,,,", str) == 0);
+	assert(strcmp("\v, ,hello,,,,", str) == 0);
 	free(str);
 }
