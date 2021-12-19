@@ -1,4 +1,3 @@
-#include "libft.h"
 #include "test.h"
 
 void ft_test_strlen(void);
@@ -7,6 +6,9 @@ void ft_test_isdigit(void);
 void ft_test_isalnum(void);
 void ft_test_isascii(void);
 void ft_test_isprint(void);
+void ft_test_isxdigit(void);
+void ft_test_isoctal(void);
+void ft_test_isspace(void);
 
 int main(void)
 {
@@ -21,5 +23,11 @@ int main(void)
     ft_test_isascii();
     print_separator();
     ft_test_isprint();
+    print_separator();
+    ft_test_isxdigit();
+    print_separator();
+    ft_test_isoctal();
+    print_separator();
+    ft_test_isspace();
     print_separator();
 }

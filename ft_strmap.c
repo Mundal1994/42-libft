@@ -18,7 +18,6 @@ char	*ft_strmap(char const *s, char (*f)(char))
 	int		i;
 	int		len;
 
-	i = 0;
 	dst = NULL;
 	if (s)
 	{
@@ -26,6 +25,7 @@ char	*ft_strmap(char const *s, char (*f)(char))
 		dst = (char *)malloc(sizeof(char) * len + 1);
 		if (!dst)
 			return (NULL);
+		i = 0;
 		while (i < len)
 		{
 			dst[i] = f((char)s[i]);

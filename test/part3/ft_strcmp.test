@@ -1,4 +1,3 @@
-#include "libft.h"
 #include "test.h"
 
 static void	strcmp_printout(char *str1, char *str2)

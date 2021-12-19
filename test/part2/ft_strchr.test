@@ -1,4 +1,3 @@
-#include "libft.h"
 #include "test.h"
 
 static int	found_strchr(size_t max_len, char seek, size_t i, int correct)

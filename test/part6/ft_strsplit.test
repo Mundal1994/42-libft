@@ -1,4 +1,3 @@
-#include "libft.h"
 #include "test.h"
 
 void	print_test(char *str, char splitter)
@@ -68,8 +67,7 @@ static void validate_full_split(char const *s, char c, char const **expected)
 void ft_test_strsplit(void)
 {
 	printf(MAGENTA"STRSPLIT\n"UNCOLOR);
-	/*
-	printf("test 1\n");
+	/*printf("test 1\n");
 	print_test("This is a pretty long sentence.", ' ');
 	printf("test 2\n");
 	print_test("    This  is    a    pretty    long         sentence.       ", ' ');
@@ -102,4 +100,22 @@ void ft_test_strsplit(void)
 	tab = ft_strsplit(s6, '-');
 	assert(*tab == NULL);
 	free_str_tab(&tab);
+
+	// free pointer test
+	/*if (dest)
+	{
+		printf("dest pnt 0: %p\n", dest[0]);
+		printf("dest pnt 1: %p\n", dest[1]);
+		printf("dest pnt 2: %p\n", dest[2]);
+		printf("dest pnt primary: %p\n", dest);
+		dest = ft_free2d(dest);
+		//printf("dest pnt 0: %p\n", dest[0]);
+		//printf("dest pnt 1: %p\n", dest[1]);
+		//printf("dest pnt 2: %p\n", dest[2]);
+		printf("dest pnt primary: %p\n", dest);
+	}*/
+	/*
+	printf("test 1\n");
+	print_test("This is a pretty long sentence.", ' ');
+	*/
 }

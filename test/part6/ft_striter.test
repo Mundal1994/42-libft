@@ -1,4 +1,3 @@
-#include "libft.h"
 #include "test.h"
 
 void	magic(char *m)

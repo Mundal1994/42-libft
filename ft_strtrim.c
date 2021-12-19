@@ -38,10 +38,10 @@ char	*ft_strtrim(char const *s)
 	if (s)
 	{
 		len = 0;
-		start = ft_begin_of_str(s);
+		start = ft_begin_of_str(s, &ft_isspace_s);
 		if (start != -1)
 		{
-			end = ft_end_of_str(s);
+			end = ft_end_of_str(s, &ft_isspace_s);
 			len = end - start + 1;
 		}
 		str = (char *)malloc(sizeof(char) * (len + 1));

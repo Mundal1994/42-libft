@@ -1,4 +1,3 @@
-#include "libft.h"
 #include "test.h"
 
 static void	rand_strlen(size_t max_len, size_t i, int correct)

@@ -15,23 +15,23 @@
 void	*ft_memccpy(void *dst, const void *src, int c,
 size_t n)
 {
-	unsigned char		*temp_dest;
-	const unsigned char	*temp_src;
+	unsigned char		*dst_ptr;
+	const unsigned char	*src_ptr;
 	unsigned char		new;
 
-	temp_dest = (unsigned char *)dst;
-	temp_src = (const unsigned char *)src;
+	dst_ptr = (unsigned char *)dst;
+	src_ptr = (const unsigned char *)src;
 	new = (unsigned char)c;
 	while (n-- > 0)
 	{
-		*temp_dest = *temp_src;
-		if (*temp_src == new)
+		*dst_ptr = *src_ptr;
+		if (*src_ptr == new)
 		{
-			temp_dest++;
-			return (temp_dest);
+			dst_ptr++;
+			return (dst_ptr);
 		}
-		temp_src++;
-		temp_dest++;
+		src_ptr++;
+		dst_ptr++;
 	}
 	return (NULL);
 }

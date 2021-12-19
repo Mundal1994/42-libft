@@ -1,4 +1,3 @@
-#include "libft.h"
 #include "test.h"
 
 void ft_test_memset(void);

@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen_stop.c                                   :+:      :+:    :+:   */
+/*   ft_isxdigit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: molesen <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/17 15:07:40 by molesen           #+#    #+#             */
-/*   Updated: 2021/11/17 15:08:14 by molesen          ###   ########.fr       */
+/*   Created: 2021/12/15 09:29:21 by molesen           #+#    #+#             */
+/*   Updated: 2021/12/15 09:47:38 by molesen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strlen_stop(char *str, char c)
-{
-	int		len;
+#include "libft.h"
 
-	len = 0;
-	while (str[len] != '\0' && str[len] != c)
-		len++;
-	return (len);
+int	ft_isxdigit(int ch)
+{
+	if (ft_isdigit(ch) == 1)
+		return (1);
+	if ((ch >= 65 && ch <= 70) || (ch >= 97 && ch <= 102))
+		return (1);
+	return (0);
 }

@@ -12,14 +12,14 @@
 
 #include "libft.h"
 
-int	ft_begin_of_str(char const *s)
+int	ft_begin_of_str(char const *s, int (*f)(int))
 {
 	int	start;
 	int	len;
 
 	start = 0;
 	len = ft_strlen((char *)s);
-	while (ft_isspace_s(s[start]) == 1 && start < len)
+	while (f(s[start]) == 1 && start < len)
 		start++;
 	if (start == len)
 		return (-1);

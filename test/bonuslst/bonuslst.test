@@ -1,4 +1,3 @@
-#include "libft.h"
 #include "test.h"
 
 static void	print_content_assert_lowercase(t_list *elem)

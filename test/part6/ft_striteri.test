@@ -1,4 +1,3 @@
-#include "libft.h"
 #include "test.h"
 
 void	more_magic(unsigned int i, char *m)

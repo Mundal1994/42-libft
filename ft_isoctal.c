@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen_stop.c                                   :+:      :+:    :+:   */
+/*   ft_isoctal.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: molesen <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/17 15:07:40 by molesen           #+#    #+#             */
-/*   Updated: 2021/11/17 15:08:14 by molesen          ###   ########.fr       */
+/*   Created: 2021/12/15 09:51:50 by molesen           #+#    #+#             */
+/*   Updated: 2021/12/15 10:05:10 by molesen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strlen_stop(char *str, char c)
+int	ft_isoctal(long nbr)
 {
-	int		len;
-
-	len = 0;
-	while (str[len] != '\0' && str[len] != c)
-		len++;
-	return (len);
+	while (nbr)
+	{
+		if ((nbr % 10) >= 8)
+			return (0);
+		else
+			nbr = nbr / 10;
+	}
+	return (1);
 }

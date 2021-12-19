@@ -1,4 +1,3 @@
-#include "libft.h"
 #include "test.h"
 
 static void	null_strncat(void)

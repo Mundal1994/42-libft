@@ -1,4 +1,3 @@
-#include "libft.h"
 #include "test.h"
 
 void	print_compare_nequ(char *s1, char *s2, int n)

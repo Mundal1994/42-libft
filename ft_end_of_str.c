@@ -12,14 +12,14 @@
 
 #include "libft.h"
 
-int	ft_end_of_str(char const *s)
+int	ft_end_of_str(char const *s, int (*f)(int))
 {
 	int	end;
 	int	len;
 
 	len = ft_strlen((char *)s);
 	end = len - 1;
-	while (ft_isspace_s(s[end]) == 1 && end > 0)
+	while (f(s[end]) == 1 && end > 0)
 		end--;
 	return (end);
 }

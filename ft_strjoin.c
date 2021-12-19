@@ -12,46 +12,41 @@
 
 #include "libft.h"
 
-static char	*ft_strjoin_i(char const *s1, char const *s2, char *str,
-unsigned int len_s1)
+static char	*ft_strjoin_calc(char const *s1, char const *s2, unsigned int
+s1_len, unsigned int s2_len)
 {
-	unsigned int	len_s2;
+	char			*temp;
 	unsigned int	i;
 	unsigned int	j;
 
-	len_s2 = ft_strlen((char *)s2);
+	temp = (char *)malloc(sizeof(char) * ((s1_len + s2_len) + 1));
+	if (!temp)
+		return (NULL);
 	i = 0;
-	while (i < len_s1)
+	while (i < s1_len)
 	{
-		str[i] = (char)s1[i];
+		temp[i] = (char)s1[i];
 		i++;
 	}
 	j = 0;
-	while (i < (len_s1 + len_s2))
-	{
-		str[i] = (char)s2[j];
-		i++;
-		j++;
-	}
-	str[i] = '\0';
-	return (str);
+	while (i < (s1_len + s2_len))
+		temp[i++] = (char)s2[j++];
+	temp[i] = '\0';
+	return (temp);
 }
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char			*str;
-	unsigned int	len_s1;
-	unsigned int	len_s2;
+	unsigned int	s1_len;
+	unsigned int	s2_len;
 
 	str = NULL;
 	if (s1 && s2)
 	{
-		len_s1 = ft_strlen((char *)s1);
-		len_s2 = ft_strlen((char *)s2);
-		str = (char *)malloc(sizeof(char) * ((len_s1 + len_s2) + 1));
-		if (!str)
-			return (NULL);
-		ft_strjoin_i(s1, s2, str, len_s1);
+		s1_len = ft_strlen((char *)s1);
+		s2_len = ft_strlen((char *)s2);
+		str = ft_strjoin_calc(s1, s2, s1_len, s2_len);
 	}
 	return (str);
 }

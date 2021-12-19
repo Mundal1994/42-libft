@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 12:16:34 by molesen           #+#    #+#             */
-/*   Updated: 2021/11/26 13:18:36 by molesen          ###   ########.fr       */
+/*   Updated: 2021/12/17 11:31:43 by molesen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@ int		ft_isalpha(int ch);
 int		ft_isascii(int ch);
 int		ft_isdigit(int ch);
 int		ft_isprint(int ch);
+int		ft_isxdigit(int ch);
+int		ft_isoctal(long nbr);
+int		ft_isspace(int ch);
 void	*ft_memccpy(void *dst, const void *src, int c,
 			size_t n);
 void	*ft_memchr(const void *str, int c, size_t n);
@@ -83,8 +86,8 @@ void	ft_lstdelone(t_list **alst, void (*del)(void *, size_t));
 void	ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 t_list	*ft_lstnew(void const *content, size_t content_size);
-int		ft_begin_of_str(char const *s);
-int		ft_end_of_str(char const *s);
+int		ft_begin_of_str(char const *s, int (*f)(int));
+int		ft_end_of_str(char const *s, int (*f)(int));
 int		ft_isspace_s(int ch);
 int		ft_strlen_stop(char *str, char c);
 int		ft_word_count(char *str, char c);

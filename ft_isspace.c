@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen_stop.c                                   :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: molesen <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/17 15:07:40 by molesen           #+#    #+#             */
-/*   Updated: 2021/11/17 15:08:14 by molesen          ###   ########.fr       */
+/*   Created: 2021/12/18 13:06:24 by molesen           #+#    #+#             */
+/*   Updated: 2021/12/18 13:06:28 by molesen          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strlen_stop(char *str, char c)
+int	ft_isspace(int ch)
 {
-	int		len;
-
-	len = 0;
-	while (str[len] != '\0' && str[len] != c)
-		len++;
-	return (len);
+	if (ch == ' ' || (ch >= 9 && ch <= 13))
+		return (1);
+	return (0);
 }

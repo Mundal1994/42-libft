@@ -15,7 +15,6 @@
 char	*ft_strsub(char const *s, unsigned int start, size_t len)
 {
 	char	*pnt;
-	size_t	i;
 
 	if (!s)
 		return (NULL);
@@ -27,13 +26,7 @@ char	*ft_strsub(char const *s, unsigned int start, size_t len)
 		ft_strcpy(pnt, "");
 		return (pnt);
 	}
-	i = 0;
-	while (i < len)
-	{
-		pnt[i] = s[start];
-		start++;
-		i++;
-	}
-	pnt[i] = '\0';
+	ft_strncpy(pnt, &s[start], len);
+	pnt[len] = '\0';
 	return (pnt);
 }

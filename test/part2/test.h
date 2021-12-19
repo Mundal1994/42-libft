@@ -1,6 +1,7 @@
 #ifndef TEST_H
 # define TEST_H
 
+# include "./includes/libft.h"
 # include <stdio.h>
 # include <ctype.h>
 # include <stdlib.h>

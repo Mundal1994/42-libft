@@ -1,15 +1,17 @@
 #include "test.h"
 
-void ft_test_isdigit(void)
+void ft_test_isxdigit(void)
 {
 	int i = 0;
 	int allmatch = 1;
 
-	printf(MAGENTA"ISDIGIT:	"UNCOLOR);
+	printf(MAGENTA"ISXDIGIT:	"UNCOLOR);
 	printf("Testing all characters from 0 to 127.	");
 	while (i < 128)
 	{
-		int result = (ft_isdigit(i) == 0 && isdigit(i) == 0) || (ft_isdigit(i) != 0 && isdigit(i) != 0);
+        //printf("orig: %d\n", isxdigit(i));
+        //printf("mine: %d\n", ft_isxdigit(i));
+		int result = (ft_isxdigit(i) == 0 && isxdigit(i) == 0) || (ft_isxdigit(i) != 0 && isxdigit(i) != 0);
 		if (!result)
 		{
 			printf(RED"KO at %c: %i\n"UNCOLOR, (char)i, result);

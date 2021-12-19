@@ -1,0 +1,49 @@
+#include "test.h"
+
+int    ft_print_error(long i)
+{
+    if ((i >= 0 && i <= 7) || (i >= 10 && i <= 17) || (i >= 20 && i <= 27) || (i >= 30 && i <= 37) || (i >= 40 && i <= 47) || \
+        (i >= 50 && i <= 57) || (i >= 60 && i <= 67) || (i >= 70 && i <= 77) || (i >= 100 && i <= 107) || (i >= 110 && i <= 117) || \
+        (i >= 120 && i <= 127) || (i >= 130 && i <= 137) || (i >= 140 && i <= 147) || (i >= 150 && i <= 157) || (i >= 160 && i <= 167) || \
+        (i >= 170 && i <= 177) || (i >= 200 && i <= 207) || (i >= 210 && i <= 217) || (i >= 220 && i <= 227) || (i >= 230 && i <= 237) || \
+        (i >= 240 && i <= 247) || (i >= 250 && i <= 257) || (i >= 260 && i <= 267) || (i >= 270 && i <= 277) || (i >= 300 && i <= 307) || \
+        (i >= 310 && i <= 317) || (i >= 320 && i <= 327) || (i >= 330 && i <= 337) || (i >= 340 && i <= 347) || (i >= 350 && i <= 357) || \
+        (i >= 360 && i <= 367) || (i >= 370 && i <= 377))
+    {
+        int result = (ft_isoctal(i) == 1);
+        if (!result)
+        {
+            printf(RED"KO at %c: %i\n"UNCOLOR, (char)i, result);
+            return (0);
+        }
+    }
+    else
+    {
+        int result = (ft_isoctal(i) == 0);
+        if (!result)
+        {
+            printf(RED"KO at %c: %i\n"UNCOLOR, (char)i, result);
+            return (0);
+        }
+    }
+    return (1);
+}
+
+void ft_test_isoctal(void)
+{
+	long i = 0;
+	int allmatch = 1;
+
+	printf(MAGENTA"ISOCTAL:	"UNCOLOR);
+	printf("Testing all characters from 0 to 400.	");
+	while (i < 400)
+	{
+        //printf("numb: %ld\n", i);
+        //printf("mine: %d\n", ft_isoctal(i));
+		allmatch = ft_print_error(i);
+		i++;
+	}
+
+	if (allmatch)
+		printf(GREEN"OK!\n"UNCOLOR);
+}

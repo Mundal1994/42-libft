@@ -15,16 +15,16 @@
 int	ft_atoi(const char *str)
 {
 	int	nb;
-	int	neg_number;
+	int	neg;
 
 	nb = 0;
-	neg_number = 0;
-	while (*str == ' ' || (*str >= 9 && *str <= 13))
+	neg = 1;
+	while (*str == ' ' || ft_isspace(*str) == 1)
 		str++;
 	if (*str == '-' || *str == '+')
 	{
 		if (*str == '-')
-			neg_number = 1;
+			neg = -1;
 		str++;
 	}
 	while (*str >= '0' && *str <= '9')
@@ -32,7 +32,5 @@ int	ft_atoi(const char *str)
 		nb = (nb * 10) + (*str - '0');
 		str++;
 	}
-	if (neg_number == 1)
-		nb = -nb;
-	return (nb);
+	return (nb * neg);
 }

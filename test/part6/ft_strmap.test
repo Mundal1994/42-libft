@@ -1,4 +1,3 @@
-#include "libft.h"
 #include "test.h"
 
 char	even_more_magic(char m)

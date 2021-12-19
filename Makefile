@@ -6,7 +6,7 @@
 #    By: molesen <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/01 12:16:20 by molesen           #+#    #+#              #
-#    Updated: 2021/11/24 10:59:44 by molesen          ###   ########.fr        #
+#    Updated: 2021/12/15 09:51:20 by molesen          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,10 @@ SRCS += ft_isalnum.c
 SRCS += ft_isalpha.c
 SRCS += ft_isascii.c
 SRCS += ft_isdigit.c
+SRCS += ft_isxdigit.c
+SRCS += ft_isoctal.c
 SRCS += ft_isprint.c
+SRCS += ft_isspace.c
 SRCS += ft_itoa.c
 SRCS += ft_lstadd.c
 SRCS += ft_lstdel.c
@@ -86,7 +89,7 @@ OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
 $(NAME):
-	$(CC) -c $(SRCS)
+	$(CC) -c -I ./includes $(SRCS)
 	ar rc $(NAME) $(OBJS)
 	ranlib $(NAME)
 

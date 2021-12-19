@@ -16,6 +16,8 @@ void	ft_lstprint_size(t_list **alst)
 {
 	t_list	*current;
 
+	if (!alst)
+		return ;
 	current = *alst;
 	ft_putchar('[');
 	while (current)

@@ -1,5 +1,5 @@
 p1:
-	@gcc -Wall -Wextra -Werror -I.. -L.. -lft -x c ./part1/part1.test ./part1/ft_isalnum.test ./part1/ft_isalpha.test ./part1/ft_isascii.test ./part1/ft_isdigit.test ./part1/ft_isprint.test ./part1/ft_strlen.test ./part1/tools.test -o p1.out
+	@gcc -Wall -Wextra -Werror -I.. -L.. -lft -x c ./part1/part1.test ./part1/ft_isalnum.test ./part1/ft_isalpha.test ./part1/ft_isxdigit.test ./part1/ft_isascii.test ./part1/ft_isdigit.test ./part1/ft_isoctal.test ./part1/ft_isprint.test ./part1/ft_strlen.test ./part1/ft_isspace.test ./part1/tools.test -o p1.out
 
 p2:
 	@gcc -Wall -Wextra -Werror -I.. -L.. -lft -x c ./part2/part2.test ./part2/ft_bzero.test ./part2/ft_memchr.test ./part2/ft_strchr.test ./part2/ft_strrchr.test ./part2/ft_tolower.test ./part2/ft_toupper.test ./part2/tools.test -o p2.out
@@ -20,3 +20,10 @@ bonus:
 	@gcc -Wall -Wextra -Werror -I.. -L.. -lft -x c ./bonuslst/bonuslst.test ./part2/tools.test -o bonus.out
 
 all: p1 p2 p3 p4 p5 p6 bonus
+
+clean:
+	/bin/rm -f *.out
+
+re: clean all
+
+.PHONY: all clean fclean re
