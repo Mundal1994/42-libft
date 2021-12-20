@@ -124,10 +124,13 @@ b:
 
 al: t1 t2 t3 t4 t5 t6 b
 
-all: lib t1 t2 t3 t4 t5 t6 b
+all: lib t1 t2 t3 t4 t5 t6 b clean
 
 clean:
-	/bin/rm -f *.out
+	/bin/rm -f ../*.o
+
+fclean: clean
+	/bin/rm -f *.out ../*.a
 
 runman:
 	./t1.out
@@ -148,4 +151,4 @@ runall:
 
 re: clean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean al runman runall re
