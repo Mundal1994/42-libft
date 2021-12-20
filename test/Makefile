@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: molesen <molesen@student.hive.fi>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/12/20 13:11:36 by molesen           #+#    #+#              #
+#    Updated: 2021/12/20 13:13:01 by molesen          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 fdr1 = ./part1/
 fdr2 = ./part2/
 fdr3 = ./part3/
@@ -32,9 +44,9 @@ func3 += $(fdr3)ft_memcmp.test
 func3 += $(fdr3)ft_memcpy.test
 func3 += $(fdr3)ft_memmove.test
 func3 += $(fdr3)ft_strcat.test
+func3 += $(fdr3)ft_strstr.test
 func3 += $(fdr3)ft_strcmp.test
 func3 += $(fdr3)ft_strcpy.test
-func3 += $(fdr3)ft_strstr.test
 func3 += $(fdr2)tools.test
 
 func4 = $(fdr4)part4.test
