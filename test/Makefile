@@ -117,6 +117,23 @@ all: lib t1 t2 t3 t4 t5 t6 b
 clean:
 	/bin/rm -f *.out
 
+runman:
+	./t1.out
+	./t2.out
+	./t3.out
+	./t4.out
+	./t5.out
+	./t6.out
+
+runall:
+	./t1.out
+	./t2.out
+	./t3.out
+	./t4.out
+	./t5.out
+	./t6.out
+	./b.out
+
 re: clean all
 
 .PHONY: all clean fclean re
