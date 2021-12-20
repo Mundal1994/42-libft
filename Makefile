@@ -89,9 +89,9 @@ OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
 $(NAME):
-	$(CC) -c -I ./includes $(SRCS)
-	ar rc $(NAME) $(OBJS)
-	ranlib $(NAME)
+	@$(CC) -c -I ./includes $(SRCS)
+	@ar rc $(NAME) $(OBJS)
+	@ranlib $(NAME)
 
 clean:
 	/bin/rm -f *.o

@@ -1,25 +1,118 @@
-p1:
-	@gcc -Wall -Wextra -Werror -I.. -L.. -lft -x c ./part1/part1.test ./part1/ft_isalnum.test ./part1/ft_isalpha.test ./part1/ft_isxdigit.test ./part1/ft_isascii.test ./part1/ft_isdigit.test ./part1/ft_isoctal.test ./part1/ft_isprint.test ./part1/ft_strlen.test ./part1/ft_isspace.test ./part1/tools.test -o p1.out
+fdr1 = ./part1/
+fdr2 = ./part2/
+fdr3 = ./part3/
+fdr4 = ./part4/
+fdr5 = ./part5/
+fdr6 = ./part6/
+fdrb = ./bonuslst/
 
-p2:
-	@gcc -Wall -Wextra -Werror -I.. -L.. -lft -x c ./part2/part2.test ./part2/ft_bzero.test ./part2/ft_memchr.test ./part2/ft_strchr.test ./part2/ft_strrchr.test ./part2/ft_tolower.test ./part2/ft_toupper.test ./part2/tools.test -o p2.out
+func1 = $(fdr1)part1.test
+func1 += $(fdr1)ft_isalnum.test
+func1 += $(fdr1)ft_isalpha.test
+func1 += $(fdr1)ft_isxdigit.test
+func1 += $(fdr1)ft_isascii.test
+func1 += $(fdr1)ft_isdigit.test 
+func1 += $(fdr1)ft_isoctal.test
+func1 += $(fdr1)ft_isprint.test
+func1 += $(fdr1)ft_strlen.test
+func1 += $(fdr1)ft_isspace.test
+func1 += $(fdr1)tools.test
 
-p3:
-	@gcc -Wall -Wextra -Werror -I.. -L.. -lft -x c ./part3/part3.test ./part3/ft_memcmp.test ./part3/ft_memcpy.test ./part3/ft_memmove.test ./part3/ft_strcat.test ./part3/ft_strcmp.test ./part3/ft_strcpy.test ./part3/ft_strstr.test ./part2/tools.test -o p3.out
+func2 = $(fdr2)part2.test
+func2 += $(fdr2)ft_bzero.test
+func2 += $(fdr2)ft_memchr.test
+func2 += $(fdr2)ft_strchr.test
+func2 += $(fdr2)ft_strrchr.test
+func2 += $(fdr2)ft_tolower.test
+func2 += $(fdr2)ft_toupper.test
+func2 += $(fdr2)tools.test
 
-p4:
-	@gcc -Wall -Wextra -Werror -I.. -L.. -lft -x c ./part4/part4.test ./part4/ft_atoi.test ./part4/ft_memccpy.test ./part4/ft_strdup.test ./part4/ft_strlcat.test ./part4/ft_strncmp.test ./part4/ft_strncat.test ./part4/ft_strncpy.test ./part4/ft_strnstr.test ./part2/tools.test -o p4.out
+func3 = $(fdr3)part3.test
+func3 += $(fdr3)ft_memcmp.test
+func3 += $(fdr3)ft_memcpy.test
+func3 += $(fdr3)ft_memmove.test
+func3 += $(fdr3)ft_strcat.test
+func3 += $(fdr3)ft_strcmp.test
+func3 += $(fdr3)ft_strcpy.test
+func3 += $(fdr3)ft_strstr.test
+func3 += $(fdr2)tools.test
 
-p5:
-	@gcc -Wall -Wextra -Werror -I.. -L.. -lft -x c ./part5/part5.test ./part5/ft_memalloc.test ./part5/ft_putchar.test ./part5/ft_putstr.test ./part5/ft_putendl.test ./part5/ft_putnbr.test ./part5/ft_strnew.test ./part5/ft_strdel.test ./part5/ft_strclr.test ./part5/ft_strequ.test ./part5/ft_strnequ.test ./part5/ft_strsub.test ./part5/ft_strjoin.test ./part5/ft_putchar_fd.test ./part5/ft_putstr_fd.test ./part5/ft_putendl_fd.test ./part5/ft_putnbr_fd.test ./part2/tools.test -o p5.out
+func4 = $(fdr4)part4.test
+func4 += $(fdr4)ft_atoi.test
+func4 += $(fdr4)ft_memccpy.test
+func4 += $(fdr4)ft_strdup.test
+func4 += $(fdr4)ft_strlcat.test
+func4 += $(fdr4)ft_strncmp.test
+func4 += $(fdr4)ft_strncat.test
+func4 += $(fdr4)ft_strncpy.test
+func4 += $(fdr4)ft_strnstr.test
+func4 += $(fdr2)tools.test
 
-p6:
-	@gcc -Wall -Wextra -Werror -I.. -L.. -lft -x c ./part6/part6.test ./part6/ft_itoa.test ./part6/ft_memdel.test ./part6/ft_striter.test ./part6/ft_striteri.test ./part6/ft_strmap.test ./part6/ft_strmapi.test ./part6/ft_strsplit.test ./part6/ft_strtrim.test ./part6/ft_memset.test ./part2/tools.test -o p6.out
+func5 = $(fdr5)part5.test
+func5 += $(fdr5)ft_memalloc.test
+func5 += $(fdr5)ft_putchar.test
+func5 += $(fdr5)ft_putstr.test
+func5 += $(fdr5)ft_putendl.test
+func5 += $(fdr5)ft_putnbr.test
+func5 += $(fdr5)ft_strnew.test
+func5 += $(fdr5)ft_strdel.test
+func5 += $(fdr5)ft_strclr.test
+func5 += $(fdr5)ft_strequ.test
+func5 += $(fdr5)ft_strnequ.test
+func5 += $(fdr5)ft_strsub.test
+func5 += $(fdr5)ft_strjoin.test
+func5 += $(fdr5)ft_putchar_fd.test
+func5 += $(fdr5)ft_putstr_fd.test
+func5 += $(fdr5)ft_putendl_fd.test
+func5 += $(fdr5)ft_putnbr_fd.test
+func5 += $(fdr2)tools.test
 
-bonus:
-	@gcc -Wall -Wextra -Werror -I.. -L.. -lft -x c ./bonuslst/bonuslst.test ./part2/tools.test -o bonus.out
+func6 = $(fdr6)part6.test
+func6 += $(fdr6)ft_itoa.test
+func6 += $(fdr6)ft_memdel.test
+func6 += $(fdr6)ft_striter.test
+func6 += $(fdr6)ft_striteri.test
+func6 += $(fdr6)ft_strmap.test
+func6 += $(fdr6)ft_strmapi.test
+func6 += $(fdr6)ft_strsplit.test
+func6 += $(fdr6)ft_strtrim.test
+func6 += $(fdr6)ft_memset.test
+func6 += $(fdr2)tools.test
 
-all: p1 p2 p3 p4 p5 p6 bonus
+funcb = $(fdrb)bonuslst.test
+funcb += $(fdr2)tools.test
+
+MAKELIB = make -C ../ fclean && make -C ../
+COMP = gcc -Wall -Wextra -Werror
+LIBR = -I.. -L.. -lft
+
+lib:
+	$(MAKELIB)
+
+t1:
+	@$(COMP) $(LIBR) -x c $(func1) -o t1.out
+
+t2:
+	@$(COMP) $(LIBR) -x c $(func2) -o t2.out
+
+t3:
+	@$(COMP) $(LIBR) -x c $(func3) -o t3.out
+
+t4:
+	@$(COMP) $(LIBR) -x c $(func4) -o t4.out
+
+t5:
+	@$(COMP) $(LIBR) -x c $(func5) -o t5.out
+
+t6:
+	@$(COMP) $(LIBR) -x c $(func6) -o t6.out
+
+b:
+	@$(COMP) $(LIBR) -x c $(funcb) -o b.out
+
+al: t1 t2 t3 t4 t5 t6 b
+
+all: lib t1 t2 t3 t4 t5 t6 b
 
 clean:
 	/bin/rm -f *.out
