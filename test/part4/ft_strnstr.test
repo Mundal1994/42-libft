@@ -1,42 +1,42 @@
 #include "test.h"
 
-void	print_strnstr_comparison(char *s1, char *s2, size_t size, char *(*f)(const char *, const char *, size_t))
+void	print_strnstr_comparison(char *s1, char *s2, size_t size, char *(*f2)(const char *, const char *, size_t), char *(*f)(const char *, const char *, size_t))
 {
-	printf("Comparing: '%s' and '%s' up to %lu: %s\n", s1, s2, size, f(s1, s2, size));
+	int correct;
+	char	*str1;
+	char	*str2;
+
+	str1 = f2(s1, s2, size);
+	str2 = f(s1, s2, size);
+	printf("Comparing: [%s] and [%s] up to [%lu]\n", s1, s2, size);
+	printf("Expected: [%s]	Output: [%s]\n", str1, str2);
+	if (str1 == NULL && str2 == NULL)
+		printf(GREEN"				OK!\n"UNCOLOR);
+	else if ((str1 == NULL && str2 != NULL) || (str1 != NULL && str2 == NULL))
+		printf(RED"				KO!\n"UNCOLOR);
+	else
+	{
+		correct = strcmp(str1, str2);
+		if (!correct)
+			printf(GREEN"				OK!\n"UNCOLOR);
+		else
+			printf(RED"				KO!\n"UNCOLOR);
+	}
 }
 
-void	ft(void)
+void	ft_test(void)
 {
-	printf("--- FT\n");
-	print_strnstr_comparison("Haystack", "Hay", 8, ft_strnstr);
-	print_strnstr_comparison("Haystack", "stack", 8, ft_strnstr);
-	print_strnstr_comparison("Haystack", "stack", 3, ft_strnstr);
-	print_strnstr_comparison("Haystack", "stack", 5, ft_strnstr);
-	print_strnstr_comparison("Haystack", "Nope", 8, ft_strnstr);
-	print_strnstr_comparison("Haystack", "Haystack", 8, ft_strnstr);
-	print_strnstr_comparison("", "Haystack", 8, ft_strnstr);
-	print_strnstr_comparison("Haystack", "", 8, ft_strnstr);
-	print_strnstr_comparison("Haystack", "Hayy", 8, ft_strnstr);
-	// print_strnstr_comparison("Haystack", NULL, 8, ft_strnstr);
-	// print_strnstr_comparison(NULL, "stack", 8, ft_strnstr);
-	printf("--- FT\n");
-}
-
-void	builtin(void)
-{
-	printf("--- BUILTIN\n");
-	print_strnstr_comparison("Haystack", "Hay", 8, strnstr);
-	print_strnstr_comparison("Haystack", "stack", 8, strnstr);
-	print_strnstr_comparison("Haystack", "stack", 3, strnstr);
-	print_strnstr_comparison("Haystack", "stack", 5, strnstr);
-	print_strnstr_comparison("Haystack", "Nope", 8, strnstr);
-	print_strnstr_comparison("Haystack", "Haystack", 8, strnstr);
-	print_strnstr_comparison("", "Haystack", 8, strnstr);
-	print_strnstr_comparison("Haystack", "", 8, strnstr);
-	print_strnstr_comparison("Haystack", "Hayy", 8, strnstr);
-	// print_strnstr_comparison("Haystack", NULL, 8, strnstr);
-	// print_strnstr_comparison(NULL, "stack", 8, strnstr);
-	printf("--- BUILTIN\n");
+	print_strnstr_comparison("Haystack", "Hay", 8, strnstr, ft_strnstr);
+	print_strnstr_comparison("Haystack", "stack", 8, strnstr, ft_strnstr);
+	print_strnstr_comparison("Haystack", "stack", 3, strnstr, ft_strnstr);
+	print_strnstr_comparison("Haystack", "stack", 5, strnstr, ft_strnstr);
+	print_strnstr_comparison("Haystack", "Nope", 8, strnstr, ft_strnstr);
+	print_strnstr_comparison("Haystack", "Haystack", 8, strnstr, ft_strnstr);
+	print_strnstr_comparison("", "Haystack", 8, strnstr, ft_strnstr);
+	print_strnstr_comparison("Haystack", "", 8, strnstr, ft_strnstr);
+	print_strnstr_comparison("Haystack", "Hayy", 8, strnstr, ft_strnstr);
+	// print_strnstr_comparison("Haystack", NULL, 8, strnstr, ft_strnstr);
+	// print_strnstr_comparison(NULL, "stack", 8, strnstr, ft_strnstr);
 }
 
 void	too_short_strnstr(void)
@@ -103,9 +103,7 @@ static int	not_found_strnstr(size_t max_haystack, size_t needle_len, size_t i)
 void	ft_test_strnstr(void)
 {
 	printf(MAGENTA"STRNSTR\n"UNCOLOR);
-	/*ft();
-	printf("\n\n\n");
-	builtin();*/
+	ft_test();
 
 	size_t	tests = 100, i = 0;
 	int correct = 1;

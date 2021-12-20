@@ -29,7 +29,7 @@ static char	**ft_strsplit_calc(char **dest, char *pnt, char c)
 			len = ft_strlen_stop(&pnt[i], c);
 			dest[word] = (char *)malloc(sizeof(char) * (len + 1));
 			if (!dest[word])
-				return(ft_free2d(dest));
+				return (ft_free2d(dest));
 			ft_strncpy(dest[word], &pnt[i], len);
 			dest[word][len] = '\0';
 			word++;

@@ -14,28 +14,26 @@
 
 char	*ft_strrchr(const char *str, int c)
 {
-	char	*pnt;
 	int		i;
 	int		pos;
 
 	i = 0;
 	pos = -1;
-	pnt = (char *)str;
-	while (pnt[i] != '\0')
+	while (str[i] != '\0')
 	{
-		if (pnt[i] == c)
+		if (str[i] == c)
 		{
 			pos = i;
 			pos++;
 		}
 		i++;
 	}
-	if (pnt[i] == c)
+	if (str[i] == c)
 	{
 		pos = i++;
 		pos++;
 	}
 	if (pos == -1)
 		return (NULL);
-	return (&pnt[pos - 1]);
+	return ((char *)&str[pos - 1]);
 }

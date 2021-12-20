@@ -79,8 +79,8 @@ void	print_comparison(const char *str)
 {
 	//printf("%11i == %11i --- string: '%s'\n", atoi(str), ft_atoi(str), str);
 	printf("String: [%s]\n", str);
-	printf("Orig: [%d]\n", atoi(str));
-	printf("Mine: [%d]\n", ft_atoi(str));
+	printf("Expected: [%d]	", atoi(str));
+	printf("Output: [%d]\n", ft_atoi(str));
 
 	if (atoi(str) - ft_atoi(str) == 0)
 		printf(GREEN"				OK!\n"UNCOLOR);

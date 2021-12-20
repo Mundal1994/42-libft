@@ -12,40 +12,26 @@
 
 #include "libft.h"
 
-static char	*ft_needle_finder_n(char *pnt, const char *needle, size_t len,
-size_t i)
+char	*ft_strnstr(char const *haystack, const char *needle, size_t len)
 {
-	int	pos;
-	int	j;
+	int		i;
+	int		needle_len;
 
-	while (pnt[i] != '\0' && i < len)
+	i = 0;
+	if (needle[i] == '\0')
+		return ((char *)haystack);
+	needle_len = ft_strlen(needle);
+	while (haystack[i] != '\0' && i <= (int)len - needle_len)
 	{
-		j = 0;
-		if (pnt[i] == needle[j])
+		if (needle_len <= (int)len)
 		{
-			pos = i;
-			while ((pnt[i] == needle[j] && i < len) || needle[j] == '\0')
-			{
-				if (needle[j] == '\0')
-					return (&pnt[pos]);
-				i++;
-				j++;
-			}
-			i = pos;
+			if (strncmp(&haystack[i], needle, needle_len) == 0)
+				return ((char *)&haystack[i]);
 		}
+		else
+			if (strncmp(&haystack[i], needle, (int)len - i + 1) == 0)
+				return ((char *)&haystack[i]);
 		i++;
 	}
 	return (NULL);
-}
-
-char	*ft_strnstr(char const *haystack, const char *needle, size_t len)
-{
-	char	*pnt;
-	size_t	i;
-
-	i = 0;
-	pnt = (char *)haystack;
-	if (needle[i] == '\0')
-		return (pnt);
-	return (ft_needle_finder_n(pnt, needle, len, i));
 }

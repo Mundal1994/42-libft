@@ -12,40 +12,20 @@
 
 #include "libft.h"
 
-static char	*ft_needle_finder(char *pnt, const char *needle, int i)
+char	*ft_strstr(char const *haystack, const char *needle)
 {
-	int	pos;
-	int	j;
+	int		i;
+	int		needle_len;
 
-	pos = -1;
-	while (pnt[i] != '\0')
+	i = 0;
+	if (needle[i] == '\0')
+		return ((char *)haystack);
+	needle_len = ft_strlen(needle);
+	while (haystack[i] != '\0')
 	{
-		j = 0;
-		if (pnt[i] == needle[j])
-		{
-			pos = i;
-			while (pnt[i] == needle[j] || needle[j] == '\0')
-			{
-				if (needle[j] == '\0')
-					return (&pnt[pos]);
-				i++;
-				j++;
-			}
-			i = pos;
-		}
+		if (strncmp(&haystack[i], needle, needle_len) == 0)
+			return ((char *)&haystack[i]);
 		i++;
 	}
 	return (NULL);
-}
-
-char	*ft_strstr(char const *haystack, const char *needle)
-{
-	char	*pnt;
-	int		i;
-
-	i = 0;
-	pnt = (char *)haystack;
-	if (needle[i] == '\0')
-		return (pnt);
-	return (ft_needle_finder(pnt, needle, i));
 }

@@ -42,75 +42,44 @@ static int	not_found_strchr(size_t max_len, char seek, size_t i, int correct)
 	return (correct);
 }
 
+void	print_strchr_comparison(char *s1, char c, char *(*f2)(const char *, int c), char *(*f)(const char *, int c))
+{
+	int correct;
+	char	*str1;
+	char	*str2;
+
+	str1 = f2(s1, c);
+	str2 = f(s1, c);
+	printf("Str: [%s] Looking for: [%c]\n", s1, c);
+	printf("Expected: [%s]	Output: [%s]\n", str1, str2);
+	if (str1 == NULL && str2 == NULL)
+		printf(GREEN"				OK!\n"UNCOLOR);
+	else if ((str1 == NULL && str2 != NULL) || (str1 != NULL && str2 == NULL))
+		printf(RED"				KO!\n"UNCOLOR);
+	else
+	{
+		correct = strcmp(str1, str2);
+		if (!correct)
+			printf(GREEN"				OK!\n"UNCOLOR);
+		else
+			printf(RED"				KO!\n"UNCOLOR);
+	}
+}
+
 void	ft_test_strchr(void)
 {
 	printf(MAGENTA"STRCHR:\n"UNCOLOR);
 
-	char s1[] = "Hello";
-	int same = 1;
-
-	printf("Source str: 'Hello'\nLooking for: 'e':\n");
-	same = strcmp(strchr(s1, 'e'), ft_strchr(s1, 'e'));
-	if (same == 0)
-		printf(GREEN"				OK!\n"UNCOLOR);
-	else
-	{
-		printf(RED"				KO!\n"UNCOLOR);
-		printf(GREEN"ORIG OUTPUT: %s\n"UNCOLOR, strchr(s1, 'e'));
-		printf(RED"YOUR OUTPUT: %s\n"UNCOLOR, ft_strchr(s1, 'e'));
-	}
-	char s2[] = "Hi";
-	printf("Source str: 'Hi'\nLooking for: 'e':\n");
-	if (strchr(s2, 'e') == NULL && ft_strchr(s2, 'e') == NULL)
-		printf(GREEN"				OK!\n"UNCOLOR);
-	else
-	{
-		printf(RED"				KO!\n"UNCOLOR);
-		printf(GREEN"ORIG OUTPUT: %s\n"UNCOLOR, strchr(s2, 'e'));
-		printf(RED"YOUR OUTPUT: %s\n"UNCOLOR, ft_strchr(s2, 'e'));
-	}
-	printf("Source str: 'Hi'\nLooking for: 'H':\n");
-	same = strcmp(strchr(s2, 'H'), ft_strchr(s2, 'H'));
-	if (same == 0)
-		printf(GREEN"				OK!\n"UNCOLOR);
-	else
-	{
-		printf(RED"				KO!\n"UNCOLOR);
-		printf(GREEN"ORIG OUTPUT: %s\n"UNCOLOR, strchr(s2, 'H'));
-		printf(RED"YOUR OUTPUT: %s\n"UNCOLOR, ft_strchr(s2, 'H'));
-	}
-	char s3[] = "";
-	printf("Source str: ''\nLooking for: '\\0':\n");
-	same = strcmp(strchr(s3, '\0'), ft_strchr(s3, '\0'));
-	if (same == 0)
-		printf(GREEN"				OK!\n"UNCOLOR);
-	else
-	{
-		printf(RED"				KO!\n"UNCOLOR);
-		printf(GREEN"ORIG OUTPUT: %s\n"UNCOLOR, strchr(s3, '\0'));
-		printf(RED"YOUR OUTPUT: %s\n"UNCOLOR, ft_strchr(s3, '\0'));
-	}
-	char s4[] = "This is a very long piece of text.";
-	printf("Source str: 'This is a very long piece of text.'\nLooking for: 'a':\n");
-	same = strcmp(strchr(s4, 'a'), ft_strchr(s4, 'a'));
-	if (same == 0)
-		printf(GREEN"				OK!\n"UNCOLOR);
-	else
-	{
-		printf(RED"				KO!\n"UNCOLOR);
-		printf(GREEN"ORIG OUTPUT: %s\n"UNCOLOR, strchr(s4, 'a'));
-		printf(RED"YOUR OUTPUT: %s\n"UNCOLOR, ft_strchr(s4, 'a'));
-	}
-	char s5[] = "Nope";
-	printf("Source str: 'Nope'\nLooking for: 'a':\n");
-	if (strchr(s2, 'e') == NULL && ft_strchr(s2, 'e') == NULL)
-		printf(GREEN"				OK!\n"UNCOLOR);
-	else
-	{
-		printf(RED"				KO!\n"UNCOLOR);
-		printf(GREEN"ORIG OUTPUT: %s\n"UNCOLOR, strchr(s5, 'a'));
-		printf(RED"YOUR OUTPUT: %s\n"UNCOLOR, ft_strchr(s5, 'a'));
-	}
+	print_strchr_comparison("Hello", 'e', strchr, ft_strchr);
+	print_strchr_comparison("Hi", 'e', strchr, ft_strchr);
+	print_strchr_comparison("Hi", 'H', strchr, ft_strchr);
+	print_strchr_comparison("", '\0', strchr, ft_strchr);
+	print_strchr_comparison("This is a very long piece of text.", 'a', strchr, ft_strchr);
+	print_strchr_comparison("Hello", 'q', strchr, ft_strchr);
+	print_strchr_comparison("", 'H', strchr, ft_strchr);
+	print_strchr_comparison("Nope", 'a', strchr, ft_strchr);
+	print_strchr_comparison("Hello", 'l', strchr, ft_strchr);
+	print_strchr_comparison("Hello my name is james james acaster", 'j', strchr, ft_strchr);
 
 	// SECOND TEST
 	size_t	tests = 100, i = 0;
