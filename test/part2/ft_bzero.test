@@ -1,4 +1,4 @@
-#include "test.h"
+#include "../test.h"
 
 void static print_char_array(char *array, int length, int orig)
 {

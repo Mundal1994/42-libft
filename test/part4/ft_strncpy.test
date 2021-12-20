@@ -1,4 +1,4 @@
-#include "test.h"
+#include "../test.h"
 
 static int	rand_strncpy(size_t max_len, size_t i)
 {

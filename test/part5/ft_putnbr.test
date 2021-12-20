@@ -1,4 +1,4 @@
-#include "test.h"
+#include "../test.h"
 
 static void	validate_putnbr(int n, char const *expected)
 {

@@ -1,4 +1,4 @@
-#include "test.h"
+#include "../test.h"
 
 static int	same_memcmp(size_t max_size, size_t i, int correct)
 {

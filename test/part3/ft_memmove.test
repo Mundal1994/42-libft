@@ -1,4 +1,4 @@
-#include "test.h"
+#include "../test.h"
 
 static int	const_memmove(int i, int correct)
 {

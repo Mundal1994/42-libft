@@ -1,4 +1,4 @@
-#include "test.h"
+#include "../test.h"
 
 int	valid_atoi(size_t max_spaces, size_t i)
 {

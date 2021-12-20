@@ -1,4 +1,4 @@
-#include "test.h"
+#include "../test.h"
 
 void	print_strnstr_comparison(char *s1, char *s2, size_t size, char *(*f2)(const char *, const char *, size_t), char *(*f)(const char *, const char *, size_t))
 {
