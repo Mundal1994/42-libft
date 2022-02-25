@@ -12,6 +12,12 @@
 
 #include "libft.h"
 
+static t_list	*ft_free_list(t_list *list)
+{
+	free (list);
+	return (NULL);
+}
+
 t_list	*ft_lstnew(void const *content, size_t content_size)
 {
 	t_list	*new_list;
@@ -30,7 +36,7 @@ t_list	*ft_lstnew(void const *content, size_t content_size)
 	{
 		item = (void *)malloc(content_size);
 		if (!item)
-			return (NULL);
+			return (ft_free_list(new_list));
 		ft_memcpy(item, content, content_size);
 		new_list->content = item;
 		new_list->content_size = content_size;
