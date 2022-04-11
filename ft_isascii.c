@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/*	checks if char matches a character from the ascii table	*/
+
 int	ft_isascii(int ch)
 {
 	if (ch >= 0 && ch <= 127)
