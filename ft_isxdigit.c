@@ -12,6 +12,8 @@
 
 #include "libft.h"
 
+/*	checks if int is hexidecimal	*/
+
 int	ft_isxdigit(int ch)
 {
 	if (ft_isdigit(ch) == 1)
