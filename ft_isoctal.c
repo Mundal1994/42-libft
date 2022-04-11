@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/*	checks if number is octal	*/
+
 int	ft_isoctal(long nbr)
 {
 	while (nbr)
