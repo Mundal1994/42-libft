@@ -10,6 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/*	
+**	checks if char is a white-space character
+**	white-space char includes: space, form-feed('\f'), newline('\n'), 
+**	carriage return('\r'), horizontal tab('\t') and vertical tab('\v').
+*/
+
 int	ft_isspace(int ch)
 {
 	if (ch == ' ' || (ch >= 9 && ch <= 13))
