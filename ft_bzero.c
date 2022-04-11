@@ -12,6 +12,8 @@
 
 #include "libft.h"
 
+/*	erases data for n amount of memory by writing zeros	*/
+
 void	ft_bzero(void *dst, size_t n)
 {
 	unsigned char	*pnt;
