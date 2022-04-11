@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/*	checks if char is printable characcter including space	*/
+
 int	ft_isprint(int ch)
 {
 	if (ch >= 32 && ch <= 126)
