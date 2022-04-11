@@ -12,6 +12,8 @@
 
 #include "libft.h"
 
+/*	checks if char is an alphanumeric character	*/
+
 int	ft_isalnum(int ch)
 {
 	if (ft_isdigit(ch) == 1 || ft_isalpha(ch) == 1)
