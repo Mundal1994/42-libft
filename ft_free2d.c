@@ -12,6 +12,8 @@
 
 #include "libft.h"
 
+/*	frees all elements of a 2d array	*/
+
 char	**ft_free2d(char **dest)
 {
 	size_t	i;
