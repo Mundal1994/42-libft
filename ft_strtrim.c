@@ -12,6 +12,18 @@
 
 #include "libft.h"
 
+/*	trims away space, tab and nextline from beginning and end of string	*/
+/*	isspace_s checks if char is space, tab or nextline	*/
+
+static int	ft_isspace_s(int ch)
+{
+	if (ch == ' ' || ch == '\t' || ch == '\n')
+		return (1);
+	return (0);
+}
+
+/*	copies string from the previous found start pos until end pos	*/
+
 static char	*ft_new_str(char const *s, char *str, int start, int end)
 {
 	int	i;
@@ -26,6 +38,12 @@ static char	*ft_new_str(char const *s, char *str, int start, int end)
 	str[i] = '\0';
 	return (str);
 }
+
+/*	
+**	main logic of strtrim. 
+**	takes care of finding start & end pos
+**	malloc enough space for the new string
+*/
 
 char	*ft_strtrim(char const *s)
 {
