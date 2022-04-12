@@ -12,6 +12,9 @@
 
 #include "libft.h"
 
+/*	converts integer into a string	*/
+/*	ft_len_of_int returns length of int	*/
+
 static int	ft_len_of_int(unsigned int i)
 {
 	if (i >= 1000000000)
@@ -35,6 +38,8 @@ static int	ft_len_of_int(unsigned int i)
 	return (1);
 }
 
+/*	if minus this function makes sure length returned is correct	*/
+
 static int	ft_len_finder(int n)
 {
 	if (n < 0)
@@ -49,6 +54,8 @@ static int	ft_len_finder(int n)
 	}
 	return (ft_len_of_int(n));
 }
+
+/*	via recursion the integer will be turned into a string	*/
 
 static char	*ft_to_string(char *dst, int nb)
 {
@@ -66,6 +73,8 @@ static char	*ft_to_string(char *dst, int nb)
 	return (dst);
 }
 
+/*	takes minus into consideration before calling the above function	*/
+
 static char	*ft_neg_calc(char *dst, int n)
 {
 	dst[0] = '-';
@@ -82,6 +91,8 @@ static char	*ft_neg_calc(char *dst, int n)
 	}
 	return (dst);
 }
+
+/*	main function of itoa. Takes care of malloc and returning string	*/
 
 char	*ft_itoa(int n)
 {
