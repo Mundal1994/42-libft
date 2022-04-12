@@ -12,6 +12,8 @@
 
 #include "libft.h"
 
+/*	deletes content of list element	*/
+
 void	ft_lstdel_content(void *content, size_t size)
 {
 	if (!content)
