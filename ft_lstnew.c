@@ -12,11 +12,16 @@
 
 #include "libft.h"
 
+/*	allocates and returns a 'fresh' link to the list	*/
+/*	if malloc allocation fails we use ft_free_list to free list*/
+
 static t_list	*ft_free_list(t_list *list)
 {
 	free (list);
 	return (NULL);
 }
+
+/*	makes link to list	*/
 
 t_list	*ft_lstnew(void const *content, size_t content_size)
 {
