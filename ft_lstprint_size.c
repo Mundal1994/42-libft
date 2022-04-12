@@ -12,6 +12,8 @@
 
 #include "libft.h"
 
+/*	loop through list and prints content and size to terminal	*/
+
 void	ft_lstprint_size(t_list **alst)
 {
 	t_list	*current;
