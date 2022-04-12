@@ -88,7 +88,6 @@ t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 t_list	*ft_lstnew(void const *content, size_t content_size);
 int		ft_begin_of_str(char const *s, int (*f)(int));
 int		ft_end_of_str(char const *s, int (*f)(int));
-int		ft_isspace_s(int ch);
 int		ft_strlen_stop(char *str, char c);
 int		ft_word_count(char *str, char c);
 void	ft_lstdel_content(void *content, size_t size);
