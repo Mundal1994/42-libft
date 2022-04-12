@@ -12,6 +12,11 @@
 
 #include "libft.h"
 
+/*	
+**	finds the end of a string
+**	what the function as an argument is checking will be skipped
+*/
+
 int	ft_end_of_str(char const *s, int (*f)(int))
 {
 	int	end;
