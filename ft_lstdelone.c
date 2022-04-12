@@ -12,6 +12,11 @@
 
 #include "libft.h"
 
+/*	
+**	free memory of link's content using the function del and free
+**	pointer is set to NULL
+*/
+
 void	ft_lstdelone(t_list **alst, void (*del)(void *, size_t))
 {
 	if (alst && del)
