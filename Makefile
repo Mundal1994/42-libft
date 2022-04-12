@@ -77,7 +77,6 @@ SRCS += ft_tolower.c
 SRCS += ft_toupper.c
 SRCS += ft_begin_of_str.c
 SRCS += ft_end_of_str.c
-SRCS += ft_isspace_s.c
 SRCS += ft_strlen_stop.c
 SRCS += ft_word_count.c
 SRCS += ft_lstdel_content.c
