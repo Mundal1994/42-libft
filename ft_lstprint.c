@@ -12,6 +12,8 @@
 
 #include "libft.h"
 
+/*	loops through all the elements of list and prints it to terminal	*/
+
 void	ft_lstprint(t_list **alst)
 {
 	t_list	*current;
