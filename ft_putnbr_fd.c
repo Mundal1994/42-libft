@@ -12,6 +12,11 @@
 
 #include "libft.h"
 
+/*	
+**	prints number to standard output, standard input or standard error
+**	depending on fd given
+*/
+
 void	ft_putnbr_fd(int n, int fd)
 {
 	if (n == -2147483648)
