@@ -12,6 +12,8 @@
 
 #include "libft.h"
 
+/*	Allocates and returns a "fresh" memory area	*/
+
 void	*ft_memalloc(size_t size)
 {
 	void	*pnt;
