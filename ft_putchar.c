@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-/*	prints a character to terminal	*/
+/*	prints a character to standard output	*/
 
 void	ft_putchar(char c)
 {
