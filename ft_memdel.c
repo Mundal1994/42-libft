@@ -12,6 +12,8 @@
 
 #include "libft.h"
 
+/*	frees memory area given as a parameter and puts pointer to NULL	*/
+
 void	ft_memdel(void **ap)
 {
 	if (ap)
