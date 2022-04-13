@@ -12,6 +12,8 @@
 
 #include "libft.h"
 
+/*	prints string to standard output	*/
+
 void	ft_putstr(char const *s)
 {
 	if (s)
