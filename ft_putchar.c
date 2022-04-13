@@ -12,6 +12,8 @@
 
 #include "libft.h"
 
+/*	prints a character to terminal	*/
+
 void	ft_putchar(char c)
 {
 	write(1, &c, 1);
