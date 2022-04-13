@@ -12,7 +12,10 @@
 
 #include "libft.h"
 
-/*	prints a string and a newline based on fd given	*/
+/*
+**	prints a string and a newline to standard output, standard input or 
+**	standard error depending on fd given
+*/
 
 void	ft_putendl_fd(char const *s, int fd)
 {
