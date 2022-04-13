@@ -12,6 +12,8 @@
 
 #include "libft.h"
 
+/*	prints a string and a newline to terminal	*/
+
 void	ft_putendl(char const *s)
 {
 	if (s)
