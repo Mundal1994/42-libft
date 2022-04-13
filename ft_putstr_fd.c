@@ -12,6 +12,11 @@
 
 #include "libft.h"
 
+/*
+**	prints string to standard output, standard input or standard error
+**	depending on fd given
+*/
+
 void	ft_putstr_fd(char const *s, int fd)
 {
 	if (s)
