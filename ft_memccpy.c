@@ -12,6 +12,11 @@
 
 #include "libft.h"
 
+/*	
+**	Copies no more than n bytes from memory area src to memory area dest,
+**	stopping when the character c is found.
+*/
+
 void	*ft_memccpy(void *dst, const void *src, int c,
 size_t n)
 {
