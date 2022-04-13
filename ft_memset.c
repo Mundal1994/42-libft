@@ -12,6 +12,8 @@
 
 #include "libft.h"
 
+/*	fill memory with char c for n amount of bytes	*/
+
 void	*ft_memset(void *str, int c, size_t n)
 {
 	unsigned char	*pnt;
