@@ -12,6 +12,8 @@
 
 #include "libft.h"
 
+/*	compares first n bytes of memory areas str1 and str2	*/
+
 int	ft_memcmp(const void *str1, const void *str2, size_t n)
 {
 	const unsigned char	*s1;
