@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-/*	prints a string and a newline to terminal	*/
+/*	prints a string and a newline to standard output	*/
 
 void	ft_putendl(char const *s)
 {
