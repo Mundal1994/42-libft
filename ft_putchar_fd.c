@@ -12,7 +12,10 @@
 
 #include "libft.h"
 
-/*	prints char based on fd given	*/
+/*
+**	prints char to standard output, standard input or standard error
+**	depending on fd given	
+*/
 
 void	ft_putchar_fd(char c, int fd)
 {
