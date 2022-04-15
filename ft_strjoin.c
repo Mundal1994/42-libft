@@ -12,6 +12,12 @@
 
 #include "libft.h"
 
+/*
+**	allocates malloc(3) and returns a 'fresh' string ending with '\0'
+**	results of the concatenation of s1 and s2
+**	if allocation fails the function return NULL
+*/
+
 static char	*ft_strjoin_calc(char const *s1, char const *s2, unsigned int
 s1_len, unsigned int s2_len)
 {
