@@ -12,6 +12,12 @@
 
 #include "libft.h"
 
+/*
+**	copies the string src including the terminating null byte to dest
+**	strings may not overlap and destination string dest must be large
+**	enough to receive the copy
+*/
+
 char	*ft_strcpy(char *dest, const char *src)
 {
 	char	*pnt;
