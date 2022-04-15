@@ -12,6 +12,13 @@
 
 #include "libft.h"
 
+/*	
+**	appends the src string to the dest string
+**	overwriting terminating null byte at the end of dest and then adds
+**	a terminating null byte. The string may not overlap and the dest string
+**	must have enough space for the result.
+*/
+
 char	*ft_strcat(char *dest, const char *src)
 {
 	size_t	dst_len;
