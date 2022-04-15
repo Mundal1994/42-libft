@@ -12,6 +12,8 @@
 
 #include "libft.h"
 
+/*	takes address of string, frees it and sets its pointer to NULL	*/
+
 void	ft_strdel(char **as)
 {
 	if (as)
