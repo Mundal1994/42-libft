@@ -12,6 +12,11 @@
 
 #include "libft.h"
 
+/*
+**	returns pointer to a new string which is a duplicate of the string str
+**	memory for new string is obtained with malloc(3) and freed with free(3)
+*/
+
 char	*ft_strdup(const char *str)
 {
 	char	*dup;
