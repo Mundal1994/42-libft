@@ -10,6 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/*	
+**	compares two strings str1 and str2
+**	comparison is done using unsigned characters
+*/
+
 int	ft_strcmp(const char *str1, const char *str2)
 {
 	int	i;
