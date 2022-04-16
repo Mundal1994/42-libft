@@ -12,6 +12,11 @@
 
 #include "libft.h"
 
+/*
+**	counts the amount of words in a string having c determine what ceberates
+**	words from each other
+*/
+
 int	ft_word_count(char *str, char c)
 {
 	int	word_count;
