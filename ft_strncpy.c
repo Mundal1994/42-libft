@@ -12,7 +12,10 @@
 
 #include "libft.h"
 
-/*	doesn't copy more than n bytes from src to dest	*/
+/*
+**	copies src string to dest
+**	doesn't copy more than n bytes from src to dest
+*/
 
 char	*ft_strncpy(char *dest, const char *src, size_t n)
 {
