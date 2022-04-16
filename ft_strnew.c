@@ -12,6 +12,12 @@
 
 #include "libft.h"
 
+/*
+**	allocates (with malloc(3)) and returns a 'fresh' string ending with '\0'
+**	each character of the string is initialized at '\0'
+**	if allocation fails the function returns NULL
+*/
+
 char	*ft_strnew(size_t size)
 {
 	char	*pnt;
