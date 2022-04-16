@@ -12,6 +12,12 @@
 
 #include "libft.h"
 
+/*
+**	compares only the first (at most) n bytes of str1 & str2
+**	comparison is done using unsigned characters and return an integer
+**	indicating the result of the comparison
+*/
+
 int	ft_strncmp(const char *str1, const char *str2, size_t n)
 {
 	size_t	i;
