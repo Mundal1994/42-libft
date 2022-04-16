@@ -12,6 +12,12 @@
 
 #include "libft.h"
 
+/*
+**	appends the null-terminated string src to the string dest
+**	copies at most dstsize and adds a terminating null byte to the result
+**	unless size is less than strlen(dest)
+*/
+
 size_t	ft_strlcat(char *dest, const char *src, size_t dstsize)
 {
 	size_t	dst_len;
