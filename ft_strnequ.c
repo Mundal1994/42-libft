@@ -12,6 +12,11 @@
 
 #include "libft.h"
 
+/*
+**	lexicographical comparison between s1 & s2 up to n characters until a '\0'
+**	if the 2 strings are identical, the function returns 1, or 0 otherwise
+*/
+
 int	ft_strnequ(char const *s1, char const *s2, size_t n)
 {
 	if (s1 && s2)
