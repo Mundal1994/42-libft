@@ -10,6 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
+**	calculates the length of a string excluding the terminating null byte
+**	or length until char c
+*/
+
 int	ft_strlen_stop(char *str, char c)
 {
 	int		len;
