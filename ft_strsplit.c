@@ -12,6 +12,12 @@
 
 #include "libft.h"
 
+/*
+**	allocates (with malloc(3)) and returns an array of 'fresh' strings
+**	obtained by splitting s using the character c as a delimiter
+**	if allocation fails the function returns NULL
+*/
+
 static char	**ft_strsplit_calc(char **dest, char *pnt, char c)
 {
 	int	i;
