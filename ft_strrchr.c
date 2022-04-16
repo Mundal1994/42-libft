@@ -12,6 +12,11 @@
 
 #include "libft.h"
 
+/*
+**	locates the last occurence of c in the string pointed to by str
+**	terminating null character is considered to be part of the string
+*/
+
 char	*ft_strrchr(const char *str, int c)
 {
 	int		i;
