@@ -10,6 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
+**	if the argument ch is an lowercase letter, the result shall be the
+**	corresponding uppercase letter
+*/
+
 int	ft_toupper(int ch)
 {
 	if (ch >= 97 && ch <= 122)
