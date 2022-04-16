@@ -12,6 +12,12 @@
 
 #include "libft.h"
 
+/*
+**	returns pointer to the located string or a null pointer if the string
+**	is not found
+**	if needle is a string with zero length, the function shall return haystack
+*/
+
 char	*ft_strstr(char const *haystack, const char *needle)
 {
 	int		i;
