@@ -12,6 +12,13 @@
 
 #include "libft.h"
 
+/*
+**	allocates (with malloc(3)) and returns a 'fresh' substring from the
+**	string given as argument. The substring begins at index start and is of
+**	size len. If start and len aren't referencing to a valid substring the
+**	behaviour is undefined. If the allocation fails the function returns NULL
+*/
+
 char	*ft_strsub(char const *s, unsigned int start, size_t len)
 {
 	char	*pnt;
